@@ -1,0 +1,11 @@
+{
+  "welcome": {
+    "title": "Poho - AI Meeting Room",
+    "description": "Video conferencing app",
+    "getStarted": "Get started by editing",
+    "saveAndSeeChanges": "Save and see your changes instantly."
+  },
+  "login": {
+    "title": "Login"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "welcome": {
+    "title": "Poho - Phòng họp AI",
+    "description": "Ứng dụng họp trực tuyến",
+    "getStarted": "Bắt đầu bằng cách chỉnh sửa",
+    "saveAndSeeChanges": "Lưu và xem thay đổi ngay lập tức."
+  },
+  "login": {
+    "title": "Đăng nhập"
+  }
+}
