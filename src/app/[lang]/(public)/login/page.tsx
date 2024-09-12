@@ -10,7 +10,7 @@ interface PageProps {
 }
 const Page = ({ params }: PageProps) => {
   const { lang } = params;
-  
+
   return (
     <div className="h-screen p-6 bg-surface dark:bg-slate-800">
       {/* Header */}
@@ -22,7 +22,7 @@ const Page = ({ params }: PageProps) => {
         </div>
       </div>
       {/* Content */}
-      <div className="border p-4 w-full sm:w-[504px] mx-auto mt-10">
+      <div className="p-4 w-full sm:w-[504px] mx-auto mt-10">
         <LoginForm lang={lang} />
       </div>
     </div>

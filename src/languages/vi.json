@@ -9,7 +9,20 @@
     "login": {
       "title": "Đăng nhập",
       "continueWithGoogle": "Tiếp tục với Google",
-      "or": "Hoặc"
+      "or": "Hoặc",
+      "emailAddress": "Địa chỉ email",
+      "password": "Mật khẩu",
+      "forgotPassword": "Quên mật khẩu?",
+      "continue": "Tiếp tục",
+      "phoneNumber": "Số điện thoại",
+      "phoneNumberPlaceholder": "0909090909",
+      "email": "Email",
+      "emailPlaceholder": "example@gmail.com",
+      "passwordPlaceholder": "mật khẩu của bạn",
+      "login": "Đăng nhập",
+      "phoneNumberFieldError": "Vui lòng nhập số điện thoại hợp lệ",
+      "emailFieldError": "Vui lòng nhập địa chỉ email hợp lệ",
+      "passwordFieldError": "Mật khẩu phải có ít nhất 8 ký tự"
     }
   }
 }

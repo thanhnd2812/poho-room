@@ -9,7 +9,20 @@
     "login": {
       "title": "Login",
       "continueWithGoogle": "Continue with Google",
-      "or": "Or"
+      "or": "Or",
+      "emailAddress": "Email address",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "continue": "Continue",
+      "phoneNumber": "Phone number",
+      "phoneNumberPlaceholder": "0909090909",
+      "phoneNumberFieldError": "Please enter a valid phone number",
+      "email": "Email",
+      "emailPlaceholder": "example@gmail.com",
+      "emailFieldError": "Please enter a valid email address",
+      "passwordPlaceholder": "your password",
+      "passwordFieldError": "Password must be at least 8 characters",
+      "login": "Login"
     }
   }
 }
