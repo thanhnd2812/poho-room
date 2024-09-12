@@ -5,7 +5,11 @@
     "getStarted": "Bắt đầu bằng cách chỉnh sửa",
     "saveAndSeeChanges": "Lưu và xem thay đổi ngay lập tức."
   },
-  "login": {
-    "title": "Đăng nhập"
+  "auth": {
+    "login": {
+      "title": "Đăng nhập",
+      "continueWithGoogle": "Tiếp tục với Google",
+      "or": "Hoặc"
+    }
   }
 }

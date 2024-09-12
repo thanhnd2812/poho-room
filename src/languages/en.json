@@ -5,7 +5,11 @@
     "getStarted": "Get started by editing",
     "saveAndSeeChanges": "Save and see your changes instantly."
   },
-  "login": {
-    "title": "Login"
+  "auth": {
+    "login": {
+      "title": "Login",
+      "continueWithGoogle": "Continue with Google",
+      "or": "Or"
+    }
   }
 }
