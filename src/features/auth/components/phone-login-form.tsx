@@ -79,7 +79,7 @@ const PhoneLoginForm = ({ phoneNumberLabel, phoneNumberPlaceholder, passwordLabe
             )}
           />
           <Button
-            className="w-full"
+            className="w-full dark:text-white"
             type="submit">{buttonLabel}</Button>
         </form>
       </Form>

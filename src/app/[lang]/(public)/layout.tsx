@@ -38,7 +38,7 @@ export default function PublicRootLayout({
       <body className={beVietnamPro.variable}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

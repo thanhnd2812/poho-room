@@ -12,13 +12,13 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
   const language = await getLanguage(lang as SupportedLanguage);
 
   return (
-    <div className="flex flex-col items-center justify-center dark:invert gap-y-6">
-      <h1 className="text-2xl font-bold text-center text-zinc-800 leading-9 ">
+    <div className="flex flex-col items-center justify-center gap-y-6">
+      <h1 className="text-2xl font-bold text-center text-zinc-800 leading-9 dark:text-white ">
         {language.auth.login.title}
       </h1>
       <div className="w-full">
         <Tabs defaultValue="email" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-2 dark:bg-muted-foreground dark:text-muted">
             <TabsTrigger value="email">
               {language.auth.login.emailAddress}
             </TabsTrigger>
@@ -61,10 +61,10 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
       </div>
       <div className="w-full">
         {/* Continue with Google */}
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full dark:hover:bg-primary-foreground">
           <div className="flex items-center justify-center gap-x-2">
             <FcGoogle size={20} />
-            <span className="text-gray-400 text-sm font-bold leading-tight">
+            <span className="text-gray-400 text-sm font-bold leading-tight dark:text-white">
               {language.auth.login.continueWithGoogle}
             </span>
           </div>
