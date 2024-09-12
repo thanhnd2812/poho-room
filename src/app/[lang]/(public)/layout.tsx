@@ -4,6 +4,7 @@ import "../../globals.css";
 
 import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
+import { cn } from "@/lib/utils";
 import { Be_Vietnam_Pro } from "next/font/google";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -35,14 +36,16 @@ export default function PublicRootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={beVietnamPro.variable}>
+      <body className={cn(beVietnamPro.variable, "dark:bg-slate-800")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="mx-auto max-w-[1400px]">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

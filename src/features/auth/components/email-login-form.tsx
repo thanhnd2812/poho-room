@@ -79,7 +79,7 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
             )}
           />
           <Button
-            className="w-full dark:text-white"
+            className="w-full dark:text-white h-12"
             type="submit">{buttonLabel}</Button>
         </form>
       </Form>

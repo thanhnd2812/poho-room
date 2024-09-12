@@ -61,7 +61,7 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
       </div>
       <div className="w-full">
         {/* Continue with Google */}
-        <Button variant="outline" className="w-full dark:hover:bg-primary-foreground">
+        <Button variant="outline" className="w-full dark:hover:bg-primary-foreground h-12">
           <div className="flex items-center justify-center gap-x-2">
             <FcGoogle size={20} />
             <span className="text-gray-400 text-sm font-bold leading-tight dark:text-white">
