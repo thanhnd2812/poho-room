@@ -36,6 +36,7 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
               buttonLabel={language.auth.login.login}
               emailFieldError={language.auth.login.emailFieldError}
               passwordFieldError={language.auth.login.passwordFieldError}
+              loginError={language.auth.login.loginError}
             />
           </TabsContent>
           <TabsContent value="phone">
@@ -48,6 +49,7 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
               buttonLabel={language.auth.login.login}
               phoneNumberFieldError={language.auth.login.phoneNumberFieldError}
               passwordFieldError={language.auth.login.passwordFieldError}
+              loginError={language.auth.login.loginError}
             />
           </TabsContent>
         </Tabs>

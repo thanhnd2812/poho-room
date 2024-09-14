@@ -13,7 +13,10 @@ import {
   FormLabel
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 import { useEmailLogin } from "../hooks/use-email-login";
 
 interface EmailLoginFormProps {
@@ -24,6 +27,7 @@ interface EmailLoginFormProps {
   buttonLabel: string;
   emailFieldError: string;
   passwordFieldError: string;
+  loginError: string;
 }
 
 const formSchema = z.object({
@@ -31,8 +35,8 @@ const formSchema = z.object({
   password: z.string().min(8).trim(),
 });
 
-const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError }: EmailLoginFormProps) => {
-
+const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError, loginError }: EmailLoginFormProps) => {
+  const [showPassword, setShowPassword] = useState(false);
   const { mutate: emailLogin, isPending } = useEmailLogin();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,11 +47,18 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
     },
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const { email, password } = values;
     emailLogin({ email, password }, {
       onSuccess: () => {
         router.push(`/`);
+      },
+      onError: () => {
+        toast.error(loginError);
       }
     });
   };
@@ -68,9 +79,14 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
                     required
                     autoFocus
                     type="email"
-                    {...field} />
+                    {...field}
+                  />
                 </FormControl>
-                {form.formState.errors.email && <span className="text-red-500 text-xs">{emailFieldError}</span>}
+                {form.formState.errors.email && (
+                  <span className="text-red-500 text-xs">
+                    {emailFieldError}
+                  </span>
+                )}
               </FormItem>
             )}
           />
@@ -81,9 +97,24 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
               <FormItem>
                 <FormLabel>{passwordLabel}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder={passwordPlaceholder} required {...field} autoComplete="current-password" />
+                  <div className="relative">
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      placeholder={passwordPlaceholder}
+                      required
+                      {...field}
+                      autoComplete="current-password"
+                    />
+                    <Button type="button" variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2">
+                      {showPassword ? <EyeOffIcon className="w-4 h-4" onClick={togglePasswordVisibility} /> : <EyeIcon className="w-4 h-4" onClick={togglePasswordVisibility} />}
+                    </Button>
+                  </div>
                 </FormControl>
-                {form.formState.errors.password && <span className="text-red-500 text-xs">{passwordFieldError}</span>}
+                {form.formState.errors.password && (
+                  <span className="text-red-500 text-xs">
+                    {passwordFieldError}
+                  </span>
+                )}
               </FormItem>
             )}
           />

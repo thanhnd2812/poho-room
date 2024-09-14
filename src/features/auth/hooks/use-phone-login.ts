@@ -3,16 +3,15 @@ import { InferRequestType, InferResponseType } from "hono";
 
 import { client } from "@/lib/hono";
 
-type ResponseType = InferResponseType<typeof client.api.auth["email-login"]["$post"], 200>;
-type RequestType = InferRequestType<typeof client.api.auth["email-login"]["$post"]>["json"];
+type ResponseType = InferResponseType<typeof client.api.auth["phone-login"]["$post"], 200>;
+type RequestType = InferRequestType<typeof client.api.auth["phone-login"]["$post"]>["json"];
 
-export const useEmailLogin = () => {
+export const usePhoneLogin = () => {
   return useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
-      const response = await client.api.auth["email-login"]["$post"]({
+      const response = await client.api.auth["phone-login"]["$post"]({
         json
       });
-      console.log("email-login response", response);
       if (!response.ok) {
         throw new Error(
           response.statusText ?? "Something went wrong"

@@ -5,7 +5,7 @@ import { handle } from "hono/vercel";
 import { sessionCheck } from "./middleware";
 import authRoutes from "./users";
 
-const publicApiRoutes = ["/auth/email-login"];
+const publicApiRoutes = ["/auth/email-login", "/auth/phone-login"];
 
 const app = new Hono().basePath("/api");
 

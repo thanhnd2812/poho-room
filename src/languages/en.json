@@ -22,7 +22,8 @@
       "emailFieldError": "Please enter a valid email address",
       "passwordPlaceholder": "your password",
       "passwordFieldError": "Password must be at least 8 characters",
-      "login": "Login"
+      "login": "Login",
+      "loginError": "User credentials are incorrect"
     }
   }
 }

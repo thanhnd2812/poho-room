@@ -13,6 +13,11 @@ import {
   FormLabel
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
+import { usePhoneLogin } from "../hooks/use-phone-login";
 
 interface PhoneLoginFormProps {
   phoneNumberLabel: string;
@@ -22,15 +27,18 @@ interface PhoneLoginFormProps {
   buttonLabel: string;
   phoneNumberFieldError: string;
   passwordFieldError: string;
+  loginError: string;
 }
 
 const formSchema = z.object({
-  phoneNumber: z.string().min(10),
-  password: z.string().min(8),
+  phoneNumber: z.string().min(10).trim(),
+  password: z.string().min(8).trim(),
 });
 
-const PhoneLoginForm = ({ phoneNumberLabel, phoneNumberPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, phoneNumberFieldError, passwordFieldError }: PhoneLoginFormProps) => {
-  
+const PhoneLoginForm = ({ phoneNumberLabel, phoneNumberPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, phoneNumberFieldError, passwordFieldError, loginError }: PhoneLoginFormProps) => {
+  const { mutate: phoneLogin, isPending } = usePhoneLogin();
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,8 +47,21 @@ const PhoneLoginForm = ({ phoneNumberLabel, phoneNumberPlaceholder, passwordLabe
     },
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    phoneLogin(values, {
+      onSuccess: () => {
+        router.push(`/`);
+      },
+      onError: (error) => {
+        console.log(error);
+        console.log("loginError", loginError);
+        toast.error(loginError);
+      }
+    })
   };
 
   return (
@@ -72,13 +93,19 @@ const PhoneLoginForm = ({ phoneNumberLabel, phoneNumberPlaceholder, passwordLabe
               <FormItem>
                 <FormLabel>{passwordLabel}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder={passwordPlaceholder} required {...field} />
+                  <div className="relative">
+                    <Input type={showPassword ? "text" : "password"} placeholder={passwordPlaceholder} required {...field} />
+                    <Button type="button" variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2">
+                      {showPassword ? <EyeOffIcon className="w-4 h-4" onClick={togglePasswordVisibility} /> : <EyeIcon className="w-4 h-4" onClick={togglePasswordVisibility} />}
+                    </Button>
+                  </div>
                 </FormControl>
                 {form.formState.errors.password && <span className="text-red-500 text-xs">{passwordFieldError}</span>}
               </FormItem>
             )}
           />
           <Button
+            disabled={isPending}
             className="w-full dark:text-white h-12"
             type="submit">{buttonLabel}</Button>
         </form>

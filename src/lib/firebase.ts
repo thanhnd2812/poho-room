@@ -1,4 +1,4 @@
-// import admin from "firebase-admin";
+
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -16,12 +16,6 @@ const firebaseConfig = {
 };
 
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-// if (!admin.apps.length) {
-//   admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
-//     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-//   });
-// }
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 const db = getFirestore(app);
