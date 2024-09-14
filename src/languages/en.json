@@ -25,5 +25,8 @@
       "login": "Login",
       "loginError": "User credentials are incorrect"
     }
+  },
+  "error": {
+    "general": "Something went wrong"
   }
 }

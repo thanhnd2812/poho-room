@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
-import { FcGoogle } from "react-icons/fc";
 import EmailLoginForm from "./email-login-form";
+import GoogleSignInButton from "./google-sign-in-button";
 import PhoneLoginForm from "./phone-login-form";
 interface LoginFormProps {
   lang: string;
@@ -13,9 +13,11 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-y-6">
+      {/* Title */}
       <h1 className="text-2xl font-bold text-center text-zinc-800 leading-9 dark:text-white ">
         {language.auth.login.title}
       </h1>
+      {/* Login with email or phone number */}
       <div className="w-full">
         <Tabs defaultValue="email" className="w-full">
           <TabsList className="grid w-full grid-cols-2 dark:bg-muted-foreground dark:text-muted">
@@ -63,14 +65,10 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
       </div>
       <div className="w-full">
         {/* Continue with Google */}
-        <Button variant="outline" className="w-full dark:hover:bg-primary-foreground h-12">
-          <div className="flex items-center justify-center gap-x-2">
-            <FcGoogle size={20} />
-            <span className="text-gray-400 text-sm font-bold leading-tight dark:text-white">
-              {language.auth.login.continueWithGoogle}
-            </span>
-          </div>
-        </Button>
+        <GoogleSignInButton
+          label={language.auth.login.continueWithGoogle}
+          loginError={language.auth.login.loginError}
+        />
       </div>
     </div>
   );
