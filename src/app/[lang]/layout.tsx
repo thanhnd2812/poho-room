@@ -1,10 +1,9 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import "@/app/globals.css";
 import type { Metadata } from "next";
-import "../../globals.css";
 
 import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
-import { cn } from "@/lib/utils";
+import { Providers } from "@/providers/providers";
 import { Be_Vietnam_Pro } from "next/font/google";
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -13,7 +12,6 @@ const beVietnamPro = Be_Vietnam_Pro({
   variable: "--font-beVietnamPro",
   display: "swap",
 });
-
 
 export async function generateMetadata({
   params,
@@ -28,25 +26,16 @@ export async function generateMetadata({
   };
 }
 
-
-export default function PublicRootLayout({
+export default async function ProtectedRootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: SupportedLanguage };
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(beVietnamPro.variable, "dark:bg-slate-800")}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="mx-auto max-w-[1400px]">
-            {children}
-          </div>
-        </ThemeProvider>
+      <body className={beVietnamPro.variable}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
