@@ -13,10 +13,12 @@ const Page = ({ params }: PageProps) => {
   const { lang } = params;
 
   return (
-    <div className="h-screen p-8 bg-surface dark:bg-slate-800 lg:flex lg:gap-x-4">
-      <div className="hidden lg:block flex-1 ">
+    <div className="h-screen p-8 bg-surface dark:bg-slate-800 lg:flex lg:gap-x-8 mx-auto max-w-[1400px]">
+      {/* Feature Slider */}
+      <div className="hidden lg:block lg:flex-1">
         <FeatureSlider lang={lang as "en" | "vi"} />
       </div>
+      {/* Login Form */}
       <div>
         {/* Header */}
         <div className="flex items-center justify-between">

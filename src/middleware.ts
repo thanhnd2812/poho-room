@@ -34,8 +34,6 @@ export async function middleware(request: NextRequest) {
   }
 
   const session = await getSession();
-  console.log(session);
-  console.log(pathname);
   if (!session && !pathname.startsWith(`/${locale}/login`)) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }

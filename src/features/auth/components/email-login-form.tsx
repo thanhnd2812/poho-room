@@ -81,7 +81,7 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
               <FormItem>
                 <FormLabel>{passwordLabel}</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder={passwordPlaceholder} required {...field} />
+                  <Input type="password" placeholder={passwordPlaceholder} required {...field} autoComplete="current-password" />
                 </FormControl>
                 {form.formState.errors.password && <span className="text-red-500 text-xs">{passwordFieldError}</span>}
               </FormItem>

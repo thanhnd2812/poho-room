@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
+import { cn } from "@/lib/utils";
 import { Providers } from "@/providers/providers";
 import { Be_Vietnam_Pro } from "next/font/google";
 
@@ -34,7 +35,7 @@ export default async function ProtectedRootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={beVietnamPro.variable}>
+      <body className={cn(beVietnamPro.variable, "dark:bg-slate-800")}>
         <Providers>{children}</Providers>
       </body>
     </html>
