@@ -2,6 +2,7 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "./constant/locales";
+import { getSession } from "./lib/session";
 
 /**
  * Get the locale from the request
@@ -26,10 +27,20 @@ export async function middleware(request: NextRequest) {
   );
 
   // If the pathname doesn't have a locale, redirect with locale
+  const locale = getLocale(request);
   if (!pathnameHasLocale) {
-    const locale = getLocale(request);
     request.nextUrl.pathname = `/${locale}${pathname}`;
     return NextResponse.redirect(request.nextUrl);
+  }
+
+  const session = await getSession();
+  console.log(session);
+  console.log(pathname);
+  if (!session && !pathname.startsWith(`/${locale}/login`)) {
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+  }
+  if (session && pathname.startsWith(`/${locale}/login`)) {
+    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
   }
 
   return NextResponse.next();

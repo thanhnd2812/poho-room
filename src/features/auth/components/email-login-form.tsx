@@ -13,12 +13,8 @@ import {
   FormLabel
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { auth } from "@/lib/firebase";
-import { useAuth } from "@/providers/auth-provider";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useTransition } from "react";
-import { toast } from "sonner";
+import { useEmailLogin } from "../hooks/use-email-login";
 
 interface EmailLoginFormProps {
   emailLabel: string;
@@ -31,20 +27,14 @@ interface EmailLoginFormProps {
 }
 
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z.string().email().trim(),
+  password: z.string().min(8).trim(),
 });
 
 const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError }: EmailLoginFormProps) => {
-  const router = useRouter();
-  const { user, loading } = useAuth();
-  const [isPending, startTransition] = useTransition();
-  useEffect(() => {
-    if (!loading && user) {
-      router.push(`/`);
-    }
-  }, [user, router, loading]);
 
+  const { mutate: emailLogin, isPending } = useEmailLogin();
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,15 +44,11 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    startTransition(() => {
-      signInWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential) => {
-        console.log(userCredential);
-        toast.success("Login successful");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    const { email, password } = values;
+    emailLogin({ email, password }, {
+      onSuccess: () => {
+        router.push(`/`);
+      }
     });
   };
 

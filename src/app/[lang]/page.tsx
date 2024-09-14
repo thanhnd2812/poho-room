@@ -1,22 +1,23 @@
 "use client";
-
-import { ProtectedRoute } from "@/components/protected-route";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/lib/firebase";
-import { signOut } from "firebase/auth";
+import { useLogout } from "@/features/auth/hooks/use-logout";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+  const { mutate: logout } = useLogout();
+  const signOut = () => {
+    logout({}, {
+      onSuccess: () => {
+        router.push(`/login`);
+      }
+    });
+  }
 
-  const loggedOut = () => {
-    signOut(auth);
-  };
-  
   return (
-    <ProtectedRoute>
-      <div>
-        <Button onClick={() => loggedOut()}>Sign out</Button>
-      </div>
-    </ProtectedRoute>
+    <div>
+      <Button onClick={signOut}>Sign out</Button>
+    </div>
   );
 }
 

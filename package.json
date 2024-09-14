@@ -25,6 +25,7 @@
     "firebase": "^10.13.1",
     "firebase-admin": "^12.4.0",
     "hono": "^4.6.1",
+    "jose": "^5.9.1",
     "lucide-react": "^0.439.0",
     "negotiator": "^0.6.3",
     "next": "14.2.9",

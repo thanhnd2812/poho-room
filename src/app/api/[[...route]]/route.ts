@@ -2,9 +2,22 @@ export const runtime = "nodejs";
 
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+import { sessionCheck } from "./middleware";
 import authRoutes from "./users";
 
+const publicApiRoutes = ["/auth/email-login"];
+
 const app = new Hono().basePath("/api");
+
+app.use(
+  "*",
+  (c, next) => {
+    if (publicApiRoutes.some((route) => c.req.url.includes(route))) {
+      return next();
+    }
+    return sessionCheck()(c, next);
+  }
+);
 
 const routes = app.route("/auth", authRoutes);
 
