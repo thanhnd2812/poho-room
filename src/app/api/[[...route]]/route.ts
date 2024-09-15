@@ -3,6 +3,8 @@ export const runtime = "nodejs";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { sessionCheck } from "./middleware";
+import profileRoutes from "./profiles";
+import roomsRoutes from "./rooms";
 import authRoutes from "./users";
 
 const publicApiRoutes = [
@@ -22,7 +24,10 @@ app.use("*", (c, next) => {
   return sessionCheck()(c, next);
 });
 
-const routes = app.route("/auth", authRoutes);
+const routes = app
+  .route("/auth", authRoutes)
+  .route("/profiles", profileRoutes)
+  .route("/rooms", roomsRoutes);
 
 export const GET = handle(app);
 export const POST = handle(app);

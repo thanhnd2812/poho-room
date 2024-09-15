@@ -12,7 +12,7 @@ export const useEmailLogin = () => {
       const response = await client.api.auth["email-login"]["$post"]({
         json
       });
-      console.log("email-login response", response);
+
       if (!response.ok) {
         throw new Error(
           response.statusText ?? "Something went wrong"
