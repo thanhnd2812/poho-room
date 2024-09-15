@@ -24,6 +24,17 @@
       "emailFieldError": "Vui lòng nhập địa chỉ email hợp lệ",
       "passwordFieldError": "Mật khẩu phải có ít nhất 8 ký tự",
       "loginError": "Thông tin đăng nhập không đúng"
+    },
+    "forgotPassword": {
+      "title": "Quên mật khẩu",
+      "description": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu.",
+      "email": "Email",
+      "emailPlaceholder": "example@gmail.com",
+      "emailFieldError": "Vui lòng nhập địa chỉ email hợp lệ",
+      "sendLink": "Gửi liên kết",
+      "backToLogin": "Trở về đăng nhập",
+      "generalError": "Có lỗi xảy ra",
+      "linkHasBeenSent": "Liên kết đặt lại mật khẩu đã được gửi đến địa chỉ email của bạn"
     }
   },
   "error": {

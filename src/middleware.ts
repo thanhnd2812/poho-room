@@ -4,6 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "./constant/locales";
 import { getSession } from "./lib/session";
 
+
+const publicRoutes = ["/login", "/verify-email", "/reset-password"];
+
 /**
  * Get the locale from the request
  * @param request - The request object
@@ -18,10 +21,14 @@ function getLocale(request: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, searchParams } = request.nextUrl;
+  console.log(pathname);
+  // Skip API routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
+
+  // Redirect to the correct locale
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
@@ -33,6 +40,27 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(request.nextUrl);
   }
 
+  const isPublicRoute = locales.some((locale) =>
+    publicRoutes.some((route) => pathname.startsWith(`/${locale}${route}`))
+  );
+
+  if (isPublicRoute) {
+    return NextResponse.next();
+  }
+
+  // Check if this is a reset password request
+  if (
+    searchParams.get("mode") === "resetPassword" &&
+    searchParams.has("oobCode") &&
+    searchParams.has("apiKey")
+  ) {
+    // This is a reset password request
+    const oobCode = searchParams.get("oobCode");
+    const redirectUrl = `/${locale}/verify-email?oobCode=${oobCode}`;
+    return NextResponse.redirect(new URL(redirectUrl, request.url));
+  }
+
+  
   const session = await getSession();
   if (!session && !pathname.startsWith(`/${locale}/login`)) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));

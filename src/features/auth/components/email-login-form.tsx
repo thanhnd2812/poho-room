@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -28,6 +29,7 @@ interface EmailLoginFormProps {
   emailFieldError: string;
   passwordFieldError: string;
   loginError: string;
+  forgotPasswordText: string;
 }
 
 const formSchema = z.object({
@@ -35,7 +37,7 @@ const formSchema = z.object({
   password: z.string().min(8).trim(),
 });
 
-const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError, loginError }: EmailLoginFormProps) => {
+const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError, loginError, forgotPasswordText }: EmailLoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: emailLogin, isPending } = useEmailLogin();
   const router = useRouter();
@@ -105,8 +107,23 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
                       {...field}
                       autoComplete="current-password"
                     />
-                    <Button type="button" variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2">
-                      {showPassword ? <EyeOffIcon className="w-4 h-4" onClick={togglePasswordVisibility} /> : <EyeIcon className="w-4 h-4" onClick={togglePasswordVisibility} />}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                    >
+                      {showPassword ? (
+                        <EyeOffIcon
+                          className="w-4 h-4"
+                          onClick={togglePasswordVisibility}
+                        />
+                      ) : (
+                        <EyeIcon
+                          className="w-4 h-4"
+                          onClick={togglePasswordVisibility}
+                        />
+                      )}
                     </Button>
                   </div>
                 </FormControl>
@@ -118,6 +135,11 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
               </FormItem>
             )}
           />
+          <div className="flex justify-end">
+            <Link href="/reset-password" className="text-sm text-primary">
+              {forgotPasswordText}
+            </Link>
+          </div>
           <Button
             disabled={isPending}
             className="w-full dark:text-white h-12"

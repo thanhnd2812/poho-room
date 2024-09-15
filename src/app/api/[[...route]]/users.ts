@@ -2,7 +2,7 @@ import { getUserByPhoneAndPassword } from "@/lib/dal/user";
 import { auth } from "@/lib/firebase";
 import { clearSession, setSession } from "@/lib/session";
 import { zValidator } from "@hono/zod-validator";
-import { GoogleAuthProvider, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, verifyPasswordResetCode } from "firebase/auth";
 import { Context, Hono } from "hono";
 import { JWTPayload } from "jose";
 import { z } from "zod";
@@ -142,6 +142,62 @@ const app = new Hono()
       success: true,
       message: "Logout successfully",
     });
-  });
+  })
+  .post(
+    "/forgot-password",
+    zValidator(
+      "json",
+      z.object({
+        email: z.string().email().trim(),
+      })
+    ),
+    async (c) => {
+      const { email } = c.req.valid("json");
+      try {
+      await sendPasswordResetEmail(auth, email);
+      return c.json({
+        success: true,
+        message: "Password reset email sent",
+      });
+    } catch (error) {
+      console.log("forgot-password", error);
+      return c.json(
+        {
+          success: false,
+          message: "Forgot password failed",
+        },
+        401
+      );
+    }
+    })
+  .post("/verify-email",
+    zValidator(
+      "json",
+      z.object({
+        code: z.string().min(6).trim(),
+      })
+    ),
+    async (c) => {
+    const { code } = c.req.valid("json");
+    try {
+      const email = await verifyPasswordResetCode(auth, code);
+      return c.json({
+        success: true,
+        message: "Email verification sent",
+        email,
+      });
+    } catch (error) {
+      console.log("verify-email", error);
+      return c.json(
+        {
+          success: false,
+          message: "Verify email failed",
+          },
+          401
+        );
+      }
+    }
+  )
+  ;
 
 export default app;

@@ -39,6 +39,7 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
               emailFieldError={language.auth.login.emailFieldError}
               passwordFieldError={language.auth.login.passwordFieldError}
               loginError={language.auth.login.loginError}
+              forgotPasswordText={language.auth.login.forgotPassword}
             />
           </TabsContent>
           <TabsContent value="phone">

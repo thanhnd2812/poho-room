@@ -23,7 +23,9 @@ const ChangeLanguage = () => {
     if (language) {
       setSelectedLanguage(language);
       // Keep current sub path, just change the language
-      router.push(`/${language.code}${pathname.replace(`/${lang}`, '')}`);
+      const path = pathname.replace(`/${lang}`, '');
+      console.log(path);
+      router.push(`/${language.code}${path}`);
     }
   };
 
