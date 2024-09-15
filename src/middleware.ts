@@ -21,8 +21,7 @@ function getLocale(request: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
-  const { pathname, searchParams } = request.nextUrl;
-  console.log(pathname);
+  const { pathname } = request.nextUrl;
   // Skip API routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
@@ -48,17 +47,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if this is a reset password request
-  if (
-    searchParams.get("mode") === "resetPassword" &&
-    searchParams.has("oobCode") &&
-    searchParams.has("apiKey")
-  ) {
-    // This is a reset password request
-    const oobCode = searchParams.get("oobCode");
-    const redirectUrl = `/${locale}/verify-email?oobCode=${oobCode}`;
-    return NextResponse.redirect(new URL(redirectUrl, request.url));
-  }
+  // // Check if this is a reset password request
+  // if (
+  //   searchParams.get("mode") === "resetPassword" &&
+  //   searchParams.has("oobCode") &&
+  //   searchParams.has("apiKey")
+  // ) {
+  //   // This is a reset password request
+  //   const oobCode = searchParams.get("oobCode");
+  //   const redirectUrl = `/${locale}/verify-email?code=${oobCode}`;
+  //   return NextResponse.redirect(new URL(redirectUrl, request.url));
+  // }
 
   
   const session = await getSession();
