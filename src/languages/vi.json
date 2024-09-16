@@ -35,6 +35,12 @@
       "backToLogin": "Trở về đăng nhập",
       "generalError": "Có lỗi xảy ra",
       "linkHasBeenSent": "Liên kết đặt lại mật khẩu đã được gửi đến địa chỉ email của bạn"
+    },
+    "logout": {
+      "title": "Đăng xuất",
+      "description": "Bạn có chắc chắn muốn đăng xuất không?",
+      "cancel": "Hủy",
+      "logout": "Đăng xuất"
     }
   },
   "error": {

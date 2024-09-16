@@ -27,6 +27,7 @@ const app = new Hono()
       }
 
       if (!apiKey || !apiSecret) {
+        console.log("No API key or secret");
         return c.json(
           {
             success: false,
