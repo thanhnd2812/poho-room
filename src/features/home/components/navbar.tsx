@@ -15,7 +15,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({ lang, confirmTitle, confirmMessage, confirmCancelText, confirmConfirmText }: NavbarProps) => {
-  
   return (
     <nav className="flex justify-between items-center fixed z-50 w-full px-6 py-4 lg:px-10 bg-dark-1">
       <Link href="/" className="flex gap-2 items-center">

@@ -43,6 +43,46 @@
       "logout": "Đăng xuất"
     }
   },
+  "meeting": {
+    "newMeeting": {
+      "title": "Phòng họp mới",
+      "description": "Tạo phòng họp mới"
+    },
+    "scheduleMeeting": {
+      "title": "Lập lịch họp",
+      "description": "Lập lịch phòng họp"
+    },
+    "joinMeeting": {
+      "title": "Tham gia",
+      "description": "Thông qua liên kết"
+    },
+    "viewRecordings": {
+      "title": "Xem lại phòng họp",
+      "description": "Lưu trữ phòng họp"
+    },
+    "instantMeetingModal": {
+      "title": "Bắt đầu phòng họp ngay lập tức",
+      "buttonText": "Tạo phòng họp"
+    },
+    "scheduleMeetingModal": {
+      "title": "Tạo phòng họp",
+      "addDescription": "Thêm mô tả",
+      "selectDateAndTime": "Chọn ngày và thời gian"
+    },
+    "meetingCreatedModal": {
+      "title": "phòng họp đã được tạo",
+      "buttonText": "Sao chép liên kết phòng họp"
+    },
+    "joinMeetingModal": {
+      "title": "Nhập hoặc dán liên kết ở đây",
+      "buttonText": "Tham gia phòng họp",
+      "placeholder": "Liên kết phòng họp"
+    },
+    "selectDateTimeError": "Vui lòng chọn ngày và thời gian",
+    "createMeetingError": "Không thể tạo phòng họp",
+    "meetingCreated": "Phòng họp đã được tạo thành công",
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+  },
   "error": {
     "general": "Có lỗi xảy ra"
   }

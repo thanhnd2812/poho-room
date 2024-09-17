@@ -123,7 +123,7 @@ const MobileNav = ({ lang, confirmTitle, confirmMessage, confirmCancelText, conf
                     onClick={signOut}
                     className="flex w-full justify-between p-2 items-center"
                   >
-                    <p className="truncate">{profile?.fullname}</p>
+                    <p className="truncate">{confirmTitle}</p>
                     <LogOut className="size-4 text-red-600" />
                   </button>
                 </div>

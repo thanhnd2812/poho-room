@@ -43,6 +43,46 @@
       "logout": "Logout"
     }
   },
+  "meeting": {
+    "newMeeting": {
+      "title": "Start Instant Meeting",
+      "description": "Start an instant meeting"
+    },
+    "scheduleMeeting": {
+      "title": "Schedule Meeting",
+      "description": "Plan your meeting"
+    },
+    "joinMeeting": {
+      "title": "Join Meeting",
+      "description": "Via invitation link"
+    },
+    "viewRecordings": {
+      "title": "View Recordings",
+      "description": "Meeting recordings"
+    },
+    "instantMeetingModal": {
+      "title": "Start Instant Meeting",
+      "buttonText": "Start Meeting"
+    },
+    "scheduleMeetingModal": {
+      "title": "Create Meeting",
+      "addDescription": "Add a description",
+      "selectDateAndTime": "Select Date and Time"
+    },
+    "meetingCreatedModal": {
+      "title": "Meeting Created",
+      "buttonText": "Copy Meeting Link"
+    },
+    "joinMeetingModal": {
+      "title": "Type or paste the link here",
+      "buttonText": "Join Meeting",
+      "placeholder": "Meeting Link"
+    },
+    "selectDateTimeError": "Please select a date and time",
+    "createMeetingError": "Failed to create meeting",
+    "meetingCreated": "Meeting created successfully",
+    "meetingLinkCopied": "Meeting link copied to clipboard"
+  },
   "error": {
     "general": "Something went wrong"
   }
