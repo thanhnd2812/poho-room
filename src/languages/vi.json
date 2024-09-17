@@ -46,21 +46,21 @@
   "meeting": {
     "newMeeting": {
       "title": "Phòng họp mới",
-      "description": "Tạo phòng họp mới",
+      "description": "Tạo phòng họp mới tức thì",
       "placeholder": "Nhập tiêu đề phòng họp hoặc mô tả"
     },
     "scheduleMeeting": {
-      "title": "Lập lịch họp",
-      "description": "Lập lịch phòng họp",
+      "title": "Lên lịch",
+      "description": "Lên lịch họp sắp tới",
       "time": "Giờ"
     },
     "joinMeeting": {
       "title": "Tham gia",
-      "description": "Thông qua liên kết"
+      "description": "Thông qua liên kết được mời"
     },
     "viewRecordings": {
-      "title": "Xem lại phòng họp",
-      "description": "Lưu trữ phòng họp"
+      "title": "Xem lại",
+      "description": "Video cuộc họp đã lưu"
     },
     "instantMeetingModal": {
       "title": "Bắt đầu phòng họp ngay lập tức",
@@ -89,7 +89,8 @@
     "setup": "Cài đặt",
     "joinWithCameraAndMicrophoneOff": "Tham gia với camera và microphone",
     "joinMeeting": "Tham gia phòng họp",
-    "copyLink": "Sao chép liên kết"
+    "copyLink": "Sao chép liên kết",
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
   },
   "meetingRoom": {
     "layout": {
@@ -97,6 +98,35 @@
       "speaker-left": "Người nói bên trái",
       "speaker-right": "Người nói bên phải"
     }
+  },
+  "personalRoom": {
+    "title": "Phòng họp cá nhân",
+    "meetingId": "Mã phòng họp",
+    "inviteLink": "Liên kết phòng họp",
+    "startMeeting": "Bắt đầu",
+    "copyInviteLink": "Sao chép liên kết mời",
+    "topic": "Chủ đề",
+    "topicDescription": "Phòng họp của {username}"
+  },
+  "callList": {
+    "noUpcomingCalls": "Không có cuộc họp sắp tới",
+    "noEndedCalls": "Không có cuộc họp đã kết thúc",
+    "noRecordings": "Không có lưu trữ",
+    "noCalls": "Không có cuộc họp",
+    "fetchRecordingsError": "Lỗi khi lấy lưu trữ",
+    "play": "Phát",
+    "start": "Bắt đầu",
+    "copyLink": "Sao chép liên kết",
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+  },
+  "upcoming": {
+    "title": "Phòng họp sắp tới"
+  },
+  "previous": {
+    "title": "Phòng họp đã diễn ra"
+  },
+  "recordings": {
+    "title": "Video cuộc họp đã lưu"
   },
   "error": {
     "general": "Có lỗi xảy ra"

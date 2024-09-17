@@ -89,7 +89,8 @@
     "setup": "Setup",
     "joinWithCameraAndMicrophoneOff": "Join with camera and microphone off",
     "joinMeeting": "Join Meeting",
-    "copyLink": "Copy Link"
+    "copyLink": "Copy Link",
+    "meetingLinkCopied": "Meeting link copied to clipboard"
   },
   "meetingRoom": {
     "layout": {
@@ -97,6 +98,35 @@
       "speaker-left": "Speaker-Left",
       "speaker-right": "Speaker-Right"
     }
+  },
+  "personalRoom": {
+    "title": "Personal Room",
+    "meetingId": "Meeting ID",
+    "inviteLink": "Invite Link",
+    "startMeeting": "Start Meeting",
+    "copyInviteLink": "Copy Invite Link",
+    "topic": "Topic",
+    "topicDescription": "{username}'s Meeting Room"
+  },
+  "callList": {
+    "noUpcomingCalls": "No upcoming calls",
+    "noEndedCalls": "No ended calls",
+    "noRecordings": "No recordings",
+    "noCalls": "No calls",
+    "fetchRecordingsError": "Error fetching recordings",
+    "play": "Play",
+    "start": "Start",
+    "copyLink": "Copy Link",
+    "meetingLinkCopied": "Meeting link copied to clipboard"
+  },
+  "upcoming": {
+    "title": "Upcoming"
+  },
+  "previous": {
+    "title": "Previous"
+  },
+  "recordings": {
+    "title": "Recordings"
   },
   "error": {
     "general": "Something went wrong"

@@ -11,6 +11,7 @@ import {
 import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const MeetingSetup = ({
   setIsSetupComplete,
@@ -68,6 +69,7 @@ const MeetingSetup = ({
                   variant="ghost"
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
+                    toast.success(t("meetingLinkCopied"));
                   }}
                 >
                   <Copy size={16} />

@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -37,7 +36,7 @@ const formSchema = z.object({
   password: z.string().min(8).trim(),
 });
 
-const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError, loginError, forgotPasswordText }: EmailLoginFormProps) => {
+const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordPlaceholder, buttonLabel, emailFieldError, passwordFieldError, loginError }: EmailLoginFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: emailLogin, isPending } = useEmailLogin();
   const router = useRouter();
@@ -135,11 +134,11 @@ const EmailLoginForm = ({ emailLabel, emailPlaceholder, passwordLabel, passwordP
               </FormItem>
             )}
           />
-          <div className="flex justify-end">
+          {/* <div className="flex justify-end">
             <Link href="/reset-password" className="text-sm text-primary">
               {forgotPasswordText}
             </Link>
-          </div>
+          </div> */}
           <Button
             disabled={isPending}
             className="w-full dark:text-white h-12"
