@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useProfile } from "@/hooks/use-profile";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import vi from "date-fns/locale/vi";
+import { vi } from "date-fns/locale";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import ReactDatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -76,8 +76,8 @@ const MeetingTypeList = ({
   const pathname = usePathname();
   // Determine the language based on the pathname
   const language = pathname?.startsWith("/vi") ? "vi" : "en";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerLocale("vi", vi as any)
+
+  registerLocale("vi", vi);
   setDefaultLocale(language);
   const router = useRouter();
   const { data: user } = useProfile();
