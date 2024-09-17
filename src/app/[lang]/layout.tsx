@@ -10,6 +10,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
+import { unstable_setRequestLocale } from "next-intl/server";
 import "react-datepicker/dist/react-datepicker.css";
 
 export function generateStaticParams() {
@@ -42,6 +43,8 @@ export default async function ProtectedRootLayout({
   children: React.ReactNode;
   params: { lang: SupportedLanguage };
 }>) {
+  unstable_setRequestLocale(params.lang);
+
   let messages;
   try {
     messages = (await import(`../../languages/${params.lang}.json`)).default;
