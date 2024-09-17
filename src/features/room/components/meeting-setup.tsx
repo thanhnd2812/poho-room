@@ -1,5 +1,6 @@
 "use client";
 
+import { PulseBeams } from "@/components/pulse-beam";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
@@ -35,49 +36,49 @@ const MeetingSetup = ({
   }, [isMicCamToggledOn, call?.camera, call?.microphone]);
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center gap-3 text-primary dark:text-white">
-      <h1 className="text-2xl font-bold">{t("setup")}</h1>
-      <VideoPreview />
-      <div className="flex h-16 items-center justify-center gap-3">
-        <label className="flex items-center justify-center gap-2 font-medium">
-          <input
-            type="checkbox"
-            checked={isMicCamToggledOn}
-            onChange={() => setIsMicCamToggledOn(!isMicCamToggledOn)}
-          />
-          <span>{t("joinWithCameraAndMicrophoneOff")}</span>
-        </label>
-        <DeviceSettings />
+    <PulseBeams className="h-screen w-full">
+      <div className="flex h-screen w-full flex-col items-center justify-center gap-3 text-primary dark:text-white">
+        <h1 className="text-2xl font-bold">{t("setup")}</h1>
+        <VideoPreview />
+        <div className="flex h-16 items-center justify-center gap-3">
+          <label className="flex items-center justify-center gap-2 font-medium">
+            <input
+              type="checkbox"
+              checked={isMicCamToggledOn}
+              onChange={() => setIsMicCamToggledOn(!isMicCamToggledOn)}
+            />
+            <span>{t("joinWithCameraAndMicrophoneOff")}</span>
+          </label>
+          <DeviceSettings />
+        </div>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={() => {
+              call?.join();
+              setIsSetupComplete(true);
+            }}
+            className="rounded-md px-4 py-2.5 text-white"
+          >
+            {t("joinMeeting")}
+          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                  }}
+                >
+                  <Copy size={16} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{t("copyLink")}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </div>
-      <div className="flex items-center gap-3">
-        <Button
-          onClick={() => {
-            call?.join();
-            setIsSetupComplete(true);
-          }}
-          className="rounded-md px-4 py-2.5 text-white"
-        >
-          {t("joinMeeting")}
-        </Button>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  navigator.clipboard.writeText(window.location.href);
-                }}
-              >
-                <Copy size={16} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              {t("copyLink")}
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    </div>
+    </PulseBeams>
   );
 };
 
