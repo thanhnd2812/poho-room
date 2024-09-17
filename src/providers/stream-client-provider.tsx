@@ -4,6 +4,7 @@ import { getStreamToken } from "@/actions/stream.actions";
 import Loader from "@/components/loader";
 import { useProfile } from "@/hooks/use-profile";
 
+import viTranslation from "@/languages/stream/vi.json";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -41,11 +42,21 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       client.disconnectUser();
     };
-  }, [user, isLoading]);
+  }, [user, isLoading, router]);
 
   if (!videoClient) return <Loader />;
 
-  return <StreamVideo client={videoClient}>{children}</StreamVideo>;
+  return (
+    <StreamVideo
+      client={videoClient}
+      language="vi"
+      translationsOverrides={{
+        vi: viTranslation,
+      }}
+    >
+      {children}
+    </StreamVideo>
+  );
 };
 
 export default StreamVideoProvider;
