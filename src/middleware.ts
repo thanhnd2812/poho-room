@@ -50,12 +50,12 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Check for session cookie
-  const sessionCookie = request.cookies.get('session');
-  if (!sessionCookie && !pathname.includes('/login')) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-  }
+  // // Check for session cookie
+  // const sessionCookie = request.cookies.get('session');
+  // if (!sessionCookie && !pathname.includes('/login')) {
+  //   const locale = getLocale(request);
+  //   return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+  // }
 
   return response;
 }
