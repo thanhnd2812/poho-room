@@ -35,6 +35,7 @@
     "lucide-react": "^0.439.0",
     "negotiator": "^0.6.3",
     "next": "14.2.9",
+    "next-intl": "^3.19.1",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-datepicker": "^7.3.0",

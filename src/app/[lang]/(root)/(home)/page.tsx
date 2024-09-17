@@ -4,6 +4,7 @@ import MeetingTypeList from "@/features/home/components/meeting-type-list";
 import { getLanguage } from "@/languages";
 
 const Page = async ({ params }: { params: { lang: SupportedLanguage } }) => {
+
   const profile = await getProfile();
   const language = await getLanguage(params.lang);
   const meetingLanguage = await language.meeting;
@@ -56,6 +57,7 @@ const Page = async ({ params }: { params: { lang: SupportedLanguage } }) => {
         createMeetingError={meetingLanguage.createMeetingError}
         meetingCreated={meetingLanguage.meetingCreated}
         meetingLinkCopied={meetingLanguage.meetingLinkCopied}
+
       />
     </section>
   );

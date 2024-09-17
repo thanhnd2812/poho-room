@@ -46,7 +46,8 @@
   "meeting": {
     "newMeeting": {
       "title": "Start Instant Meeting",
-      "description": "Start an instant meeting"
+      "description": "Start an instant meeting",
+      "placeholder": "Enter meeting room title or description"
     },
     "scheduleMeeting": {
       "title": "Schedule Meeting",
@@ -82,6 +83,11 @@
     "createMeetingError": "Failed to create meeting",
     "meetingCreated": "Meeting created successfully",
     "meetingLinkCopied": "Meeting link copied to clipboard"
+  },
+  "meetingSetup": {
+    "setup": "Setup",
+    "joinWithCameraAndMicrophoneOff": "Join with camera and microphone off",
+    "joinMeeting": "Join Meeting"
   },
   "error": {
     "general": "Something went wrong"

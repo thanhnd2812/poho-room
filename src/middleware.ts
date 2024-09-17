@@ -1,11 +1,13 @@
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "./constant/locales";
+import { routing } from "./i18n/routing";
 import { getSession } from "./lib/session";
 
-
 const publicRoutes = ["/login", "/verify-email", "/reset-password"];
+const intlMiddleware = createIntlMiddleware(routing);
 
 /**
  * Get the locale from the request
@@ -26,6 +28,9 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
+  // Handle internationalization first
+  const intlResponse = await intlMiddleware(request);
+  if (intlResponse) return intlResponse;
 
   // Redirect to the correct locale
   const pathnameHasLocale = locales.some(
@@ -59,7 +64,6 @@ export async function middleware(request: NextRequest) {
   //   return NextResponse.redirect(new URL(redirectUrl, request.url));
   // }
 
-  
   const session = await getSession();
   if (!session && !pathname.startsWith(`/${locale}/login`)) {
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));

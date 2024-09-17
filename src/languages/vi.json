@@ -46,7 +46,8 @@
   "meeting": {
     "newMeeting": {
       "title": "Phòng họp mới",
-      "description": "Tạo phòng họp mới"
+      "description": "Tạo phòng họp mới",
+      "placeholder": "Nhập tiêu đề phòng họp hoặc mô tả"
     },
     "scheduleMeeting": {
       "title": "Lập lịch họp",
@@ -82,6 +83,11 @@
     "createMeetingError": "Không thể tạo phòng họp",
     "meetingCreated": "Phòng họp đã được tạo thành công",
     "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+  },
+  "meetingSetup": {
+    "setup": "Cài đặt",
+    "joinWithCameraAndMicrophoneOff": "Tham gia với camera và microphone tắt",
+    "joinMeeting": "Tham gia phòng họp"
   },
   "error": {
     "general": "Có lỗi xảy ra"

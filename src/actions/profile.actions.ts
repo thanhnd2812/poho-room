@@ -13,7 +13,7 @@ export const getProfile = async () => {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to get profile");
+    return undefined;
   }
 
   const { data } = await response.json();

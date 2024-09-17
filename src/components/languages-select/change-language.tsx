@@ -24,14 +24,14 @@ const ChangeLanguage = () => {
       setSelectedLanguage(language);
       // Keep current sub path, just change the language
       const path = pathname.replace(`/${lang}`, '');
-      console.log(path);
+      
       router.push(`/${language.code}${path}`);
     }
   };
 
   return (
     <Select defaultValue={defaultLanguage.code} onValueChange={handleValueChange}>
-      <SelectTrigger className="w-[130px] bg-gray-100/50 dark:bg-gray-800/50 dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-gray-300 dark:border-gray-700 font-medium text-gray-500">
+      <SelectTrigger className="w-[130px] bg-white dark:bg-gray-800/50 dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-gray-300 dark:border-gray-700 font-medium text-gray-500">
         <div className="flex items-center justify-center gap-3">
           <span className="text-xl">{selectedLanguage.flag}</span>
           <span className="text-base font-bold">{selectedLanguage.short}</span>

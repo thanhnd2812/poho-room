@@ -41,11 +41,13 @@ interface MeetingTypeListProps {
   createMeetingError: string;
   meetingCreated: string;
   meetingLinkCopied: string;
+
 }
 
 const MeetingTypeList = ({
   newMeetingTitle,
   newMeetingDescription,
+
   joinMeetingTitle,
   joinMeetingDescription,
   scheduleMeetingTitle,
@@ -66,6 +68,7 @@ const MeetingTypeList = ({
   createMeetingError,
   meetingCreated,
   meetingLinkCopied,
+
 }: MeetingTypeListProps) => {
   const router = useRouter();
   const { data: user } = useProfile();
@@ -107,7 +110,7 @@ const MeetingTypeList = ({
       setCallDetails(call);
 
       if (!values.description) {
-        router.push(`/meeting/${call.id}`);
+        router.push(`/rooms/${call.id}`);
       }
       toast.success(meetingCreated);
     } catch (error) {
@@ -116,7 +119,7 @@ const MeetingTypeList = ({
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_APP_URL}/meeting/${callDetails?.id}`;
+  const meetingLink = `${process.env.NEXT_PUBLIC_APP_URL}/rooms/${callDetails?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -156,7 +159,7 @@ const MeetingTypeList = ({
         className="text-center"
         buttonText={instantMeetingModalButtonText}
         handleClick={createMeeting}
-      />
+       />
 
       {!callDetails ? (
         <MeetingModal

@@ -35,12 +35,13 @@ const MeetingModal = ({
               <Image src={image} alt="meeting-image" width={72} height={72} />
             </div>
           )}
+
           <h1 className={cn("text-3xl font-bold leading-[42px]", className)}>
             {title}
           </h1>
           {children}
           <Button
-            className="bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="bg-blue-1 focus-visible:ring-0 focus-visible:ring-offset-0 text-white"
             onClick={handleClick}
           >
             {buttonIcon && (

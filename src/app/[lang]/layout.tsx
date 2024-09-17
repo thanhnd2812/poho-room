@@ -5,8 +5,15 @@ import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/providers/providers";
+import { NextIntlClientProvider } from "next-intl";
 import { Be_Vietnam_Pro } from "next/font/google";
+import { notFound } from "next/navigation";
 
+import "@stream-io/video-react-sdk/dist/css/styles.css";
+
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "vi" }];
+}
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -29,14 +36,23 @@ export async function generateMetadata({
 
 export default async function ProtectedRootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: { lang: SupportedLanguage };
 }>) {
+  let messages;
+  try {
+    messages = (await import(`../../languages/${params.lang}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body className={cn(beVietnamPro.variable, "dark:bg-slate-800")}>
-        <Providers>{children}</Providers>
+        <NextIntlClientProvider messages={messages}>
+          <Providers>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import Loader from "@/components/loader";
 import { useProfile } from "@/hooks/use-profile";
 
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!;
@@ -14,9 +15,16 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
     null
   );
   const { data: user, isLoading } = useProfile();
-
+  const router = useRouter();
   useEffect(() => {
-    if (isLoading || !user) return;
+    if (isLoading) return;
+
+    if (!user) {
+      // Redirect to login if user is null or undefined
+      router.push("/login");
+      return;
+    }
+
     if (!apiKey) throw new Error("No API key found");
 
     const client = new StreamVideoClient({
