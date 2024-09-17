@@ -6,7 +6,7 @@ import { useProfile } from "@/hooks/use-profile";
 
 import viTranslation from "@/languages/stream/vi.json";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY!;
@@ -17,6 +17,10 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const { data: user, isLoading } = useProfile();
   const router = useRouter();
+  const pathname = usePathname();
+  // Determine the language based on the pathname
+  const language = pathname?.startsWith('/vi') ? 'vi' : 'en';
+
   useEffect(() => {
     if (isLoading) return;
 
@@ -49,7 +53,7 @@ const StreamVideoProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <StreamVideo
       client={videoClient}
-      language="vi"
+      language={language}
       translationsOverrides={{
         vi: viTranslation,
       }}

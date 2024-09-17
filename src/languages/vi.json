@@ -86,8 +86,16 @@
   },
   "meetingSetup": {
     "setup": "Cài đặt",
-    "joinWithCameraAndMicrophoneOff": "Tham gia với camera và microphone tắt",
-    "joinMeeting": "Tham gia phòng họp"
+    "joinWithCameraAndMicrophoneOff": "Tham gia với camera và microphone",
+    "joinMeeting": "Tham gia phòng họp",
+    "copyLink": "Sao chép liên kết"
+  },
+  "meetingRoom": {
+    "layout": {
+      "grid": "Lưới",
+      "speaker-left": "Người nói bên trái",
+      "speaker-right": "Người nói bên phải"
+    }
   },
   "error": {
     "general": "Có lỗi xảy ra"

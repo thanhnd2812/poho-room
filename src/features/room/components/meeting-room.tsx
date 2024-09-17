@@ -19,6 +19,7 @@ import {
   useCallStateHooks,
 } from "@stream-io/video-react-sdk";
 import { LayoutList, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -30,7 +31,7 @@ const MeetingRoom = () => {
   const { useCallCallingState } = useCallStateHooks();
   const callCallingState = useCallCallingState();
   const router = useRouter();
-
+  const t = useTranslations("meetingRoom");
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
@@ -64,7 +65,7 @@ const MeetingRoom = () => {
 
 
   return (
-    <section className="relative h-screen w-full overflow-hidden pt-4 text-white">
+    <section className="relative h-screen w-full overflow-hidden pt-4 text-white bg-slate-500 dark:bg-slate-800">
       <div className="relative flex size-full items-center justify-center">
         <div className="flex size-full max-w-[1000px] items-center gap-5">
           <CallLayout />
@@ -98,7 +99,7 @@ const MeetingRoom = () => {
                   }}
                   className="cursor-pointer"
                 >
-                  {layout}
+                  {t(`layout.${layout.toLowerCase()}`)}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="border-dark-1" />
               </div>

@@ -87,7 +87,15 @@
   "meetingSetup": {
     "setup": "Setup",
     "joinWithCameraAndMicrophoneOff": "Join with camera and microphone off",
-    "joinMeeting": "Join Meeting"
+    "joinMeeting": "Join Meeting",
+    "copyLink": "Copy Link"
+  },
+  "meetingRoom": {
+    "layout": {
+      "grid": "Grid",
+      "speaker-left": "Speaker-Left",
+      "speaker-right": "Speaker-Right"
+    }
   },
   "error": {
     "general": "Something went wrong"

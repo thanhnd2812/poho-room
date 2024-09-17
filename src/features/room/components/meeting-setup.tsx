@@ -1,11 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   DeviceSettings,
   useCall,
   VideoPreview,
 } from "@stream-io/video-react-sdk";
+import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -47,15 +49,34 @@ const MeetingSetup = ({
         </label>
         <DeviceSettings />
       </div>
-      <Button
-        onClick={() => {
-          call?.join();
-          setIsSetupComplete(true);
-        }}
-        className="rounded-md px-4 py-2.5 text-white"
-      >
-        {t("joinMeeting")}
-      </Button>
+      <div className="flex items-center gap-3">
+        <Button
+          onClick={() => {
+            call?.join();
+            setIsSetupComplete(true);
+          }}
+          className="rounded-md px-4 py-2.5 text-white"
+        >
+          {t("joinMeeting")}
+        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  navigator.clipboard.writeText(window.location.href);
+                }}
+              >
+                <Copy size={16} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {t("copyLink")}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
     </div>
   );
 };
