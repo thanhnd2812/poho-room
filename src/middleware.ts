@@ -4,7 +4,6 @@ import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "./constant/locales";
 import { routing } from "./i18n/routing";
-import { getSession } from "./lib/session";
 
 const publicRoutes = ["/login", "/verify-email", "/reset-password"];
 const intlMiddleware = createIntlMiddleware(routing);
@@ -24,22 +23,21 @@ function getLocale(request: NextRequest): string {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  
   // Skip API routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
+  
   // Handle internationalization first
-  const intlResponse = await intlMiddleware(request);
-  if (intlResponse) return intlResponse;
-
-  // Redirect to the correct locale
+  const response = await intlMiddleware(request);
+  
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  // If the pathname doesn't have a locale, redirect with locale
-  const locale = getLocale(request);
   if (!pathnameHasLocale) {
+    const locale = getLocale(request);
     request.nextUrl.pathname = `/${locale}${pathname}`;
     return NextResponse.redirect(request.nextUrl);
   }
@@ -49,30 +47,17 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isPublicRoute) {
-    return NextResponse.next();
+    return response;
   }
 
-  // // Check if this is a reset password request
-  // if (
-  //   searchParams.get("mode") === "resetPassword" &&
-  //   searchParams.has("oobCode") &&
-  //   searchParams.has("apiKey")
-  // ) {
-  //   // This is a reset password request
-  //   const oobCode = searchParams.get("oobCode");
-  //   const redirectUrl = `/${locale}/verify-email?code=${oobCode}`;
-  //   return NextResponse.redirect(new URL(redirectUrl, request.url));
-  // }
-
-  const session = await getSession();
-  if (!session && !pathname.startsWith(`/${locale}/login`)) {
+  // Check for session cookie
+  const sessionCookie = request.cookies.get('session');
+  if (!sessionCookie && !pathname.includes('/login')) {
+    const locale = getLocale(request);
     return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
-  if (session && pathname.startsWith(`/${locale}/login`)) {
-    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
-  }
 
-  return NextResponse.next();
+  return response;
 }
 
 export const config = {
