@@ -4,12 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useProfile } from "@/hooks/use-profile";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { useRouter } from "next/navigation";
+import vi from "date-fns/locale/vi";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import ReactDatePicker from "react-datepicker";
+import ReactDatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import { toast } from "sonner";
 import MeetingModal from "./meeting-modal";
 import HomeCard from "./meeting-type-card";
+
+
 
 enum MeetingType {
   INSTANT = "instant",
@@ -41,13 +44,12 @@ interface MeetingTypeListProps {
   createMeetingError: string;
   meetingCreated: string;
   meetingLinkCopied: string;
-
+  time: string;
 }
 
 const MeetingTypeList = ({
   newMeetingTitle,
   newMeetingDescription,
-
   joinMeetingTitle,
   joinMeetingDescription,
   scheduleMeetingTitle,
@@ -68,8 +70,15 @@ const MeetingTypeList = ({
   createMeetingError,
   meetingCreated,
   meetingLinkCopied,
+  time,
 
 }: MeetingTypeListProps) => {
+  const pathname = usePathname();
+  // Determine the language based on the pathname
+  const language = pathname?.startsWith("/vi") ? "vi" : "en";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  registerLocale("vi", vi as any)
+  setDefaultLocale(language);
   const router = useRouter();
   const { data: user } = useProfile();
   const client = useStreamVideoClient();
@@ -122,7 +131,7 @@ const MeetingTypeList = ({
   const meetingLink = `${process.env.NEXT_PUBLIC_APP_URL}/rooms/${callDetails?.id}`;
 
   return (
-    <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
       <HomeCard
         title={newMeetingTitle}
         description={newMeetingDescription}
@@ -159,7 +168,7 @@ const MeetingTypeList = ({
         className="text-center"
         buttonText={instantMeetingModalButtonText}
         handleClick={createMeeting}
-       />
+      />
 
       {!callDetails ? (
         <MeetingModal
@@ -167,6 +176,7 @@ const MeetingTypeList = ({
           onClose={() => setMeetingState(undefined)}
           title={scheduleMeetingModalTitle}
           handleClick={createMeeting}
+          buttonText={scheduleMeetingModalTitle}
         >
           <div className="flex flex-col gap-2.5">
             <label className="text-base text-normal leading-[22px] text-sky-2">
@@ -189,7 +199,7 @@ const MeetingTypeList = ({
               showTimeSelect
               timeFormat="h:mm aa"
               timeIntervals={15}
-              timeCaption="Time"
+              timeCaption={time}
               dateFormat="MMMM d, yyyy h:mm aa"
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
             />

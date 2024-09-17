@@ -12,7 +12,7 @@ export const sidebarLinks = [
       en: "Upcoming",
       vi: "Sắp diễn ra",
     },
-    route: "/upcoming",
+    route: "/#",
     imgUrl: "/icons/upcoming.svg",
   },
   {
@@ -20,7 +20,7 @@ export const sidebarLinks = [
       en: "Previous",
       vi: "Đã diễn ra",
     },
-    route: "/previous",
+    route: "/#",
     imgUrl: "/icons/previous.svg",
   },
   {
@@ -36,7 +36,7 @@ export const sidebarLinks = [
       en: "Personal Room",
       vi: "Phòng cá nhân",
     },
-    route: "/personal-room",
+    route: "/#",
     imgUrl: "/icons/add-personal.svg",
   },
 ];

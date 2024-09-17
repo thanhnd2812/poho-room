@@ -51,7 +51,8 @@
     },
     "scheduleMeeting": {
       "title": "Lập lịch họp",
-      "description": "Lập lịch phòng họp"
+      "description": "Lập lịch phòng họp",
+      "time": "Giờ"
     },
     "joinMeeting": {
       "title": "Tham gia",

@@ -51,7 +51,8 @@
     },
     "scheduleMeeting": {
       "title": "Schedule Meeting",
-      "description": "Plan your meeting"
+      "description": "Plan your meeting",
+      "time": "Time"
     },
     "joinMeeting": {
       "title": "Join Meeting",

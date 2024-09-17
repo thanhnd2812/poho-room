@@ -10,6 +10,7 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "vi" }];
