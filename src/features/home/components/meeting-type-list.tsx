@@ -12,8 +12,6 @@ import { toast } from "sonner";
 import MeetingModal from "./meeting-modal";
 import HomeCard from "./meeting-type-card";
 
-
-
 enum MeetingType {
   INSTANT = "instant",
   SCHEDULE = "schedule",

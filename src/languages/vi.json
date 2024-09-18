@@ -100,7 +100,9 @@
       "speaker-right": "Người nói bên phải"
     },
     "copyRoomLink": "Sao chép liên kết phòng họp",
-    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
+    "defaultTitle": "Poho AI Room - Phòng {id}",
+    "defaultDescription": "Tham gia phòng họp với ID: {id}"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",

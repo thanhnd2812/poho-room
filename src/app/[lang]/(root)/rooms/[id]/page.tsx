@@ -7,7 +7,6 @@ import { useGetCallById } from "@/hooks/use-get-call-by-id";
 import { useProfile } from "@/hooks/use-profile";
 import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useState } from "react";
-
 interface MeetingPageProps {
   params: {
     id: string;
@@ -15,7 +14,6 @@ interface MeetingPageProps {
 }
 
 const MeetingPage = ({ params }: MeetingPageProps) => {
-
   const { isLoading } = useProfile();
   const [isSetupComplete, setIsSetupComplete] = useState(false);
   const { call, isCallLoading } = useGetCallById(params.id);

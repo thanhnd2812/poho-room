@@ -100,7 +100,9 @@
       "speaker-right": "Speaker-Right"
     },
     "copyRoomLink": "Copy room link",
-    "meetingLinkCopied": "Meeting link copied to clipboard"
+    "meetingLinkCopied": "Meeting link copied to clipboard",
+    "defaultTitle": "Poho AI Room - Room {id}",
+    "defaultDescription": "Join the meeting with ID: {id}"
   },
   "personalRoom": {
     "title": "Personal Room",

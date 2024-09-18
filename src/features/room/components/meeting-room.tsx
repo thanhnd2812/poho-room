@@ -37,7 +37,8 @@ const MeetingRoom = () => {
   const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
-  
+
+
   useEffect(() => {
     switch (callCallingState) {
       case CallingState.LEFT:
