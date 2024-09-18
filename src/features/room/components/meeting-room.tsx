@@ -107,8 +107,7 @@ const MeetingRoom = () => {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* <CallStatsButton /> */}
-        {/* Copy room link */}
+
         <Hint text={t("copyRoomLink")}>
           <Button
             className="rounded-full bg-[#19232D] hover:bg-[#4c535b]"
