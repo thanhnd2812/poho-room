@@ -83,7 +83,8 @@
     "selectDateTimeError": "Vui lòng chọn ngày và thời gian",
     "createMeetingError": "Không thể tạo phòng họp",
     "meetingCreated": "Phòng họp đã được tạo thành công",
-    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
+    "reconnecting": "Đang kết nối lại phòng họp..."
   },
   "meetingSetup": {
     "setup": "Cài đặt",
@@ -97,7 +98,9 @@
       "grid": "Lưới",
       "speaker-left": "Người nói bên trái",
       "speaker-right": "Người nói bên phải"
-    }
+    },
+    "copyRoomLink": "Sao chép liên kết phòng họp",
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",
