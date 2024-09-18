@@ -1,4 +1,5 @@
 import { getProfile } from "@/actions/profile.actions";
+import DateTimeDisplay from "@/components/date-time-display";
 import { SupportedLanguage } from "@/constant/locales";
 import MeetingTypeList from "@/features/home/components/meeting-type-list";
 import { getLanguage } from "@/languages";
@@ -7,18 +8,8 @@ const Page = async ({ params }: { params: { lang: SupportedLanguage } }) => {
 
   const profile = await getProfile();
   const language = await getLanguage(params.lang);
-  const meetingLanguage = await language.meeting;
-  const now = new Date();
-  const time = now.toLocaleTimeString(`${params.lang}`, {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const date = now.toLocaleDateString(`${params.lang}`, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const meetingLanguage = language.meeting;
+  
   return (
     <section className="flex size-full flex-col gap-10 text-white">
       {/* Hero Section */}
@@ -27,10 +18,7 @@ const Page = async ({ params }: { params: { lang: SupportedLanguage } }) => {
           <h2 className="glassmorphism max-w-[270px] rounded py-2 text-center text-xl font-bold">
             Welcome, {profile?.fullname || "Guest"}
           </h2>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-4xl font-extrabold lg:text-7xl">{time}</h1>
-            <p className="text-lg font-medium text-sky-1 lg:text-2xl">{date}</p>
-          </div>
+          <DateTimeDisplay lang={params.lang} />
         </div>
       </div>
       {/* Upcoming Meetings Section */}

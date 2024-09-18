@@ -13,9 +13,6 @@ import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { unstable_setRequestLocale } from "next-intl/server";
 import "react-datepicker/dist/react-datepicker.css";
 
-// export function generateStaticParams() {
-//   return [{ locale: "en" }, { locale: "vi" }];
-// }
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
