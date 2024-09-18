@@ -1,6 +1,5 @@
 import { db } from "@/lib/firebase";
 import { collection, doc, getDoc, getDocs, or, query, where } from "firebase/firestore";
-import { cache } from "react";
 import { FirebaseUser } from "../definitions";
 import { comparePassword } from "../utils";
 
@@ -34,7 +33,7 @@ export const getUserByPhoneAndPassword = async (phone: string, password: string)
   }
 }
 
-export const getUserById = cache(async (id: string) => {
+export const getUserById = async (id: string) => {
   const user = await getDoc(doc(db, "users", id));
   const data = user.data();
   if (!data) {
@@ -48,4 +47,4 @@ export const getUserById = cache(async (id: string) => {
     avatarUrl: data.avatarUrl,
     points: data.points,
   } as FirebaseUser;
-});
+};
