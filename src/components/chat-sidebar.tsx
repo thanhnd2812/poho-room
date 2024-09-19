@@ -11,6 +11,7 @@ import {
   useChatContext,
   Window,
 } from "stream-chat-react";
+import { useMediaQuery } from "usehooks-ts";
 import { Button } from "./ui/button";
 
 const DEFAULT_CHANNEL_TYPE = "livestream";
@@ -21,12 +22,17 @@ interface ChatSidebarProps {
   onClose: () => void;
 }
 export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const params = useParams();
   const searchParams = useSearchParams();
   const roomId = (params.id as string) || searchParams.get("id");
 
   const { client, setActiveChannel } = useChatContext();
-
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDesktop && e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   useEffect(() => {
     if (roomId) {
       const channel = client.channel(channelType, roomId);
@@ -35,7 +41,9 @@ export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
   }, [roomId, client, setActiveChannel]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+    <div
+      onClick={handleBackdropClick}
+      className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
       <div className="fixed inset-y-0 right-0 w-full overflow-y-auto border-l bg-background shadow-lg md:w-96">
         <Channel>
           <Window>
