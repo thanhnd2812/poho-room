@@ -1,5 +1,6 @@
 "use client";
 
+import { ChatSidebar } from "@/components/chat-sidebar";
 import Hint from "@/components/hint";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,7 @@ import {
   SpeakerLayout,
   useCallStateHooks
 } from "@stream-io/video-react-sdk";
-import { Copy, LayoutList, Users } from "lucide-react";
+import { Copy, LayoutList, MessageCircle, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -37,7 +38,7 @@ const MeetingRoom = () => {
   const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
   const [showParticipants, setShowParticipants] = useState(false);
-
+  const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
     switch (callCallingState) {
@@ -65,7 +66,6 @@ const MeetingRoom = () => {
     }
   };
 
-
   return (
     <section className="relative h-screen w-full overflow-hidden pt-4 text-white bg-slate-500 dark:bg-slate-800">
       <div className="relative flex size-full items-center justify-center">
@@ -78,6 +78,13 @@ const MeetingRoom = () => {
           })}
         >
           <CallParticipantsList onClose={() => setShowParticipants(false)} />
+        </div>
+        <div
+          className={cn("hidden ml-2", {
+            "show-block": showChat,
+          })}
+        >
+          <ChatSidebar onClose={() => setShowChat(false)} />
         </div>
       </div>
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
@@ -130,6 +137,11 @@ const MeetingRoom = () => {
         <button onClick={() => setShowParticipants((prev) => !prev)}>
           <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
             <Users size={20} className="text-white" />
+          </div>
+        </button>
+        <button onClick={() => setShowChat((prev) => !prev)}>
+          <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+            <MessageCircle size={20} className="text-white" />
           </div>
         </button>
         {!isPersonalRoom && <EndCallButton />}

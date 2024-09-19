@@ -5,13 +5,13 @@ import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/providers/providers";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { NextIntlClientProvider } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { notFound } from "next/navigation";
-
-import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { unstable_setRequestLocale } from "next-intl/server";
 import "react-datepicker/dist/react-datepicker.css";
+import "stream-chat-react/dist/css/v2/index.css";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],

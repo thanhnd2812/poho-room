@@ -1,0 +1,66 @@
+"use client";
+
+import { X } from "lucide-react";
+import { useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import {
+  Channel,
+  ChannelHeader,
+  MessageInput,
+  MessageList,
+  useChatContext,
+  Window,
+} from "stream-chat-react";
+import { Button } from "./ui/button";
+
+const DEFAULT_CHANNEL_TYPE = "livestream";
+
+const channelType = process.env.STREAM_CHANNEL_TYPE ?? DEFAULT_CHANNEL_TYPE;
+
+interface ChatSidebarProps {
+  onClose: () => void;
+}
+export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const roomId = (params.id as string) || searchParams.get("id");
+
+  const { client, setActiveChannel } = useChatContext();
+
+  useEffect(() => {
+    if (roomId) {
+      const channel = client.channel(channelType, roomId);
+      setActiveChannel(channel);
+    }
+  }, [roomId, client, setActiveChannel]);
+
+  return (
+    <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+      <div className="fixed inset-y-0 right-0 w-full overflow-y-auto border-l bg-background shadow-lg md:w-96">
+        <Channel>
+          <Window>
+            <ChannelHeader />
+            <MessageList
+              messageActions={[
+                "edit",
+                "delete",
+                "flag",
+                "mute",
+                "pin",
+              ]}
+            />
+            <MessageInput focus />
+          </Window>
+        </Channel>
+        <Button
+          variant="ghost"
+          onClick={onClose}
+          className="absolute top-2 right-2"
+          size="icon"
+        >
+          <X size={20} />
+        </Button>
+      </div>
+    </div>
+  );
+};

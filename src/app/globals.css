@@ -120,6 +120,21 @@ html, body, :root {
   /* height: 40px; */
 }
 
+/* ======== stream chat css overrides ======== */
+.str-chat__channel {
+  @apply w-full;
+}
+
+.str-chat__channel-header .str-chat__channel-header-end {
+  row-gap: unset;
+}
+
+.str-chat__channel-header {
+  @apply p-3;
+}
+
+
+
 .glassmorphism {
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(4px);
