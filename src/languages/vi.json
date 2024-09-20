@@ -102,7 +102,16 @@
     "copyRoomLink": "Sao chép liên kết phòng họp",
     "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
     "defaultTitle": "Poho AI Room - Phòng {id}",
-    "defaultDescription": "Tham gia phòng họp với ID: {id}"
+    "defaultDescription": "Tham gia phòng họp với ID: {id}",
+    "participantsList": "Danh sách người tham gia",
+    "chat": "Chat",
+    "showParticipants": "Hiển thị danh sách người tham gia",
+    "hideParticipants": "Ẩn danh sách người tham gia",
+    "showChat": "Hiển thị chat",
+    "hideChat": "Ẩn chat",
+    "transcription": "Phiên âm",
+    "startTranscription": "Bắt đầu phiên âm",
+    "stopTranscription": "Dừng phiên âm"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",

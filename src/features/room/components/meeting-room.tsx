@@ -26,6 +26,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import EndCallButton from "./end-call-button";
+import { MyToggleTranscriptionButton } from "./toggle-transcription-button";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
 
@@ -134,16 +135,23 @@ const MeetingRoom = () => {
             <Copy size={16} />
           </Button>
         </Hint>
-        <button onClick={() => setShowParticipants((prev) => !prev)}>
-          <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+        <Hint text={t("showParticipants")}>
+          <button onClick={() => setShowParticipants((prev) => !prev)}>
+            <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
             <Users size={20} className="text-white" />
-          </div>
-        </button>
-        <button onClick={() => setShowChat((prev) => !prev)}>
-          <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+            </div>
+          </button>
+        </Hint>
+        <Hint text={t("transcription")}>
+          <MyToggleTranscriptionButton />
+        </Hint>
+        <Hint text={t("showChat")}>
+          <button onClick={() => setShowChat((prev) => !prev)}>
+            <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
             <MessageCircle size={20} className="text-white" />
           </div>
         </button>
+        </Hint>
         {!isPersonalRoom && <EndCallButton />}
       </div>
     </section>

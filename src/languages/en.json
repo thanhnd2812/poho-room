@@ -123,7 +123,16 @@
     "start": "Start",
     "copyLink": "Copy Link",
     "meetingLinkCopied": "Meeting link copied to clipboard",
-    "personalMeeting": "Personal Meeting"
+    "personalMeeting": "Personal Meeting",
+    "participantsList": "Participants List",
+    "chat": "Chat",
+    "showParticipants": "Show Participants",
+    "hideParticipants": "Hide Participants",
+    "showChat": "Show Chat",
+    "hideChat": "Hide Chat",
+    "transcription": "Transcription",
+    "startTranscription": "Start Transcription",
+    "stopTranscription": "Stop Transcription"
   },
   "upcoming": {
     "title": "Upcoming"
