@@ -1,11 +1,13 @@
 "use client";
 import MeetingCard from "@/components/meeting-card";
 import { useGetCalls } from "@/hooks/use-get-calls";
+import { cn } from "@/lib/utils";
 import { Call, CallRecording } from "@stream-io/video-react-sdk";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { ChatSidebar } from "./chat-sidebar";
 import Loader from "./loader";
 
 interface CallListProps {
@@ -13,6 +15,7 @@ interface CallListProps {
 }
 
 const CallList = ({ type }: CallListProps) => {
+  const [openRoomId, setOpenRoomId] = useState<string | null>(null);
   const { endedCalls, upcomingCalls, callRecordings, isLoading } =
     useGetCalls();
   const t = useTranslations("callList");
@@ -46,6 +49,10 @@ const CallList = ({ type }: CallListProps) => {
     }
   };
 
+  const openPreviousMeetingChat = (roomId: string) => {
+    setOpenRoomId(roomId);
+  };
+
   useEffect(() => {
     const fetchRecordings = async () => {
       try {
@@ -70,6 +77,16 @@ const CallList = ({ type }: CallListProps) => {
   if (isLoading) return <Loader />;
   return (
     <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+      <div
+        className={cn("hidden ml-2", {
+          "show-block": openRoomId,
+        })}
+      >
+        <ChatSidebar
+          onClose={() => setOpenRoomId(null)}
+          previousMeetingId={openRoomId || undefined}
+        />
+      </div>
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
           <MeetingCard
@@ -77,7 +94,7 @@ const CallList = ({ type }: CallListProps) => {
             title={
               (meeting as Call).state?.custom?.description?.substring(0, 26) ||
               (meeting as CallRecording).filename?.substring(0, 20) ||
-              "Personal Meeting"
+              t("personalMeeting")
             }
             date={
               (meeting as Call).state?.startsAt?.toLocaleString() ||
@@ -104,6 +121,12 @@ const CallList = ({ type }: CallListProps) => {
               type === "recordings"
                 ? () => window.open((meeting as CallRecording).url, "_blank")
                 : () => router.push(`/rooms/${(meeting as Call).id}`)
+            }
+            previousMeetingId={
+              type === "ended" ? (meeting as Call).id : undefined
+            }
+            openPreviousMeetingChat={
+              type === "ended" ? openPreviousMeetingChat : undefined
             }
           />
         ))

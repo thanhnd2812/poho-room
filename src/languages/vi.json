@@ -122,7 +122,8 @@
     "play": "Phát",
     "start": "Bắt đầu",
     "copyLink": "Sao chép liên kết",
-    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
+    "personalMeeting": "Phòng họp cá nhân"
   },
   "upcoming": {
     "title": "Phòng họp sắp tới"

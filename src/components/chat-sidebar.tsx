@@ -20,13 +20,17 @@ const channelType = process.env.STREAM_CHANNEL_TYPE ?? DEFAULT_CHANNEL_TYPE;
 
 interface ChatSidebarProps {
   onClose: () => void;
+  previousMeetingId?: string;
 }
-export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
+export const ChatSidebar = ({
+  onClose,
+  previousMeetingId,
+}: ChatSidebarProps) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const params = useParams();
   const searchParams = useSearchParams();
-  const roomId = (params.id as string) || searchParams.get("id");
-
+  const roomId =
+    previousMeetingId || (params.id as string) || searchParams.get("id");
   const { client, setActiveChannel } = useChatContext();
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isDesktop && e.target === e.currentTarget) {
@@ -36,6 +40,7 @@ export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
   useEffect(() => {
     if (roomId) {
       const channel = client.channel(channelType, roomId);
+      channel.watch();
       setActiveChannel(channel);
     }
   }, [roomId, client, setActiveChannel]);
@@ -57,7 +62,7 @@ export const ChatSidebar = ({ onClose }: ChatSidebarProps) => {
                 "pin",
               ]}
             />
-            <MessageInput focus />
+            {!previousMeetingId && <MessageInput focus />}
           </Window>
         </Channel>
         <Button

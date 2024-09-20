@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { avatarImages } from "@/constant/sidebar-links";
 import { cn } from "@/lib/utils";
+import { MessageCircleIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
@@ -16,7 +17,9 @@ interface MeetingCardProps {
   buttonIcon1?: string;
   buttonText?: string;
   handleClick: () => void;
+  openPreviousMeetingChat?: (roomId: string) => void;
   link: string;
+  previousMeetingId?: string;
 }
 
 const MeetingCard = ({
@@ -28,7 +31,10 @@ const MeetingCard = ({
   handleClick,
   link,
   buttonText,
+  previousMeetingId,
+  openPreviousMeetingChat,
 }: MeetingCardProps) => {
+
   const t = useTranslations("callList");
   return (
     <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
@@ -83,7 +89,19 @@ const MeetingCard = ({
             </Button>
           </div>
         )}
+        {/* View chat history if this is a previous meeting */}
+        {isPreviousMeeting && openPreviousMeetingChat && (
+          <Button
+            variant={"secondary"}
+            size="icon"
+            onClick={() => openPreviousMeetingChat(previousMeetingId as string)}
+            className="rounded-full"
+          >
+            <MessageCircleIcon className="w-4 h-4" />
+          </Button>
+        )}
       </article>
+      
     </section>
   );
 };

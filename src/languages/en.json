@@ -122,7 +122,8 @@
     "play": "Play",
     "start": "Start",
     "copyLink": "Copy Link",
-    "meetingLinkCopied": "Meeting link copied to clipboard"
+    "meetingLinkCopied": "Meeting link copied to clipboard",
+    "personalMeeting": "Personal Meeting"
   },
   "upcoming": {
     "title": "Upcoming"
