@@ -1,13 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { storage } from "@/lib/firebase";
 import { cn } from "@/lib/utils";
 import {
   TranscriptionSettingsRequestModeEnum,
   useCall,
   useCallStateHooks,
 } from "@stream-io/video-react-sdk";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { CgTranscript } from "react-icons/cg";
@@ -29,23 +27,8 @@ export const MyToggleTranscriptionButton = () => {
   const handlingTranscription = async () => {
     setIsLoading(true);
     try {
-      // Generate a unique file name (you might want to use a more robust method)
-      const fileName = `transcriptions/${call?.id}.json`;
-
-      // Create a reference to the file location
-      const fileRef = ref(storage, fileName);
-
-      // Upload an empty JSON object to initialize the file
-      await uploadBytes(
-        fileRef,
-        new Blob([JSON.stringify({})], { type: "application/json" })
-      );
-
-      // Get the download URL
-      const url = await getDownloadURL(fileRef);
-      // Start transcription with the generated URL
       await call?.startTranscription({
-        transcription_external_storage: url,
+        transcription_external_storage: "gcs-transcriptions-2",
       });
     } catch (err) {
       console.error("Failed to start transcription", err);

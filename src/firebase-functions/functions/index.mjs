@@ -1,41 +1,55 @@
-import { initializeApp } from "firebase-admin/app";
-import { getStorage } from "firebase-admin/storage";
+import cors from "cors";
+import admin from "firebase-admin";
 import { https, logger } from "firebase-functions";
-initializeApp();
+import serviceAccount from "./firebase-service-account.json" assert { type: "json" };
+const corsHandler = cors({ origin: true });
 
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+async function createAdminApp() {
+  // INITIALIZE PRODUCT MODE FIREBASE
+  // const serviceAccount = require('./poho_service_account.json');
+  // return admin.initializeApp({
+  //   serviceAccountId: 'firebase-adminsdk-dqksa@poho-bed42.iam.gserviceaccount.com',
+  //   storageBucket: 'gs://poho-bed42.appspot.com/',
+  //   credential: admin.credential.cert(serviceAccount)
+  // })
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+  /// INITIALIZE DEV MODE FIREBASE
+  
 
-export const getTranscriptionUrl = https.onCall(async (data) => {
-  const { roomId } = data;
-  const fileName = `transcriptions/${roomId}.json`;
-  const bucket = getStorage().bucket();
-  const file = bucket.file(fileName);
-
-  // Create an empty JSON file
-  await file.save("{}", {
-    metadata: { contentType: "application/json" },
+  return admin.initializeApp({
+    serviceAccountId: "firebase-adminsdk-xlxxa@poho-vn.iam.gserviceaccount.com",
+    storageBucket: "gs://poho-vn.appspot.com/",
+    credential: admin.credential.cert(serviceAccount),
   });
+}
 
-  // Generate a signed URL that's valid for 1 hour
-  const [url] = await file.getSignedUrl({
-    action: "read",
-    expires: Date.now() + 3600 * 1000, // 1 hour
+await createAdminApp();
+
+
+export const getTranscriptionUrl = https.onRequest((request, response) => {
+  return corsHandler(request, response, async () => {
+    try {
+      const { roomId } = request.body.data;
+      const fileName = `transcriptions/${roomId}.json`;
+      const bucket = admin.storage().bucket();
+      const file = bucket.file(fileName);
+
+      // Create an empty JSON file
+      await file.save("{}", {
+        metadata: { contentType: "application/json" },
+      });
+
+      // Generate a signed URL that's valid for 1 hour
+      const [url] = await file.getSignedUrl({
+        action: "read",
+        expires: Date.now() + 3600 * 1000, // 1 hour
+      });
+      logger.info(`Generated URL: ${url}`);
+      response.json({ result: { url } });
+    } catch (error) {
+      console.error("Error:", error);
+      response.status(500).json({ error: "Internal server error" });
+    }
   });
-  logger.info("Generated URL:", url);
-  return { url };
 });
