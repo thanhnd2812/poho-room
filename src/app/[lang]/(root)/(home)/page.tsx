@@ -47,6 +47,8 @@ const Page = async ({ params }: { params: { lang: SupportedLanguage } }) => {
         meetingLinkCopied={meetingLanguage.meetingLinkCopied}
         time={meetingLanguage.scheduleMeeting.time}
         instantMeeting={meetingLanguage.newMeeting.instantMeeting}
+        publicMeeting={meetingLanguage.newMeeting.publicMeeting}
+        publicMeetingDescription={meetingLanguage.newMeeting.publicMeetingDescription}
       />
     </section>
   );

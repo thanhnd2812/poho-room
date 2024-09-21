@@ -1,5 +1,6 @@
 "use client";
 
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RoomType } from "@/constant/room-types";
@@ -45,6 +46,8 @@ interface MeetingTypeListProps {
   meetingLinkCopied: string;
   time: string;
   instantMeeting: string;
+  publicMeeting: string;
+  publicMeetingDescription: string;
 }
 
 const MeetingTypeList = ({
@@ -72,6 +75,8 @@ const MeetingTypeList = ({
   meetingLinkCopied,
   time,
   instantMeeting,
+  publicMeeting,
+  publicMeetingDescription,
 }: MeetingTypeListProps) => {
   const pathname = usePathname();
   // Determine the language based on the pathname
@@ -88,6 +93,7 @@ const MeetingTypeList = ({
     dateTime: new Date(),
     description: "",
     link: "",
+    isPublic: false,
   });
   const [callDetails, setCallDetails] = useState<Call | null>(null);
 
@@ -101,7 +107,7 @@ const MeetingTypeList = ({
       }
 
       const id = crypto.randomUUID();
-      const call = client.call(RoomType.DEFAULT, id);
+      const call = client.call(values.isPublic ? RoomType.PUBLIC : RoomType.DEFAULT, id);
       if (!call) throw new Error(createMeetingError);
 
       const startsAt =
@@ -113,13 +119,18 @@ const MeetingTypeList = ({
           starts_at: startsAt,
           custom: {
             description,
+            is_public: values.isPublic,
           },
         },
       });
       setCallDetails(call);
 
       if (!values.description) {
-        router.push(`/rooms/${call.id}`);
+        if (values.isPublic) {
+          router.push(`/public-rooms/${call.id}`);
+        } else {
+          router.push(`/rooms/${call.id}`);
+        }
       }
       toast.success(meetingCreated);
     } catch (error) {
@@ -168,7 +179,22 @@ const MeetingTypeList = ({
         className="text-center"
         buttonText={instantMeetingModalButtonText}
         handleClick={createMeeting}
-      />
+      >
+        <div className="flex space-x-2 ml-4">
+          <Checkbox id="isPublic" checked={values.isPublic} onCheckedChange={(checked) => setValues({ ...values, isPublic: checked as boolean })} />
+          <div className="grid gap-1.5 leading-none">
+            <label
+              htmlFor="isPublic"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              {publicMeeting}
+            </label>
+            <p className="text-sm text-muted-foreground">
+              {publicMeetingDescription}
+            </p>
+          </div>
+        </div>
+      </MeetingModal>
 
       {!callDetails ? (
         <MeetingModal
@@ -203,7 +229,7 @@ const MeetingTypeList = ({
               dateFormat="MMMM d, yyyy h:mm aa"
               className="w-full rounded bg-dark-3 p-2 focus:outline-none"
               minDate={new Date()}
-              filterTime={time => {
+              filterTime={(time) => {
                 const currentTime = new Date();
                 return time.getTime() >= currentTime.getTime();
               }}

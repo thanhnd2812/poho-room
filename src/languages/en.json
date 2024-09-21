@@ -48,7 +48,9 @@
       "title": "Start Instant Meeting",
       "description": "Start an instant meeting",
       "placeholder": "Enter meeting room title or description",
-      "instantMeeting": "Instant Meeting"
+      "instantMeeting": "Instant Meeting",
+      "publicMeeting": "Public Meeting",
+      "publicMeetingDescription": "Everyone can join this meeting and 40 minutes after the meeting, the meeting will be automatically closed."
     },
     "scheduleMeeting": {
       "title": "Schedule Meeting",
@@ -103,7 +105,15 @@
     "copyRoomLink": "Copy room link",
     "meetingLinkCopied": "Meeting link copied to clipboard",
     "defaultTitle": "Poho AI Room - Room {id}",
-    "defaultDescription": "Join the meeting with ID: {id}"
+    "defaultDescription": "Join the meeting with ID: {id}",
+    "chat": "Chat",
+    "showParticipants": "Show participants",
+    "hideParticipants": "Hide participants",
+    "showChat": "Show chat",
+    "hideChat": "Hide chat",
+    "transcription": "Transcription",
+    "startTranscription": "Start transcription",
+    "stopTranscription": "Stop transcription"
   },
   "personalRoom": {
     "title": "Personal Room",

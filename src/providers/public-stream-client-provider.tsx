@@ -5,6 +5,7 @@ import Loader from "@/components/loader";
 import { useFakeUser } from "@/hooks/use-fake-user";
 import { ResponseType, useProfile } from "@/hooks/use-profile";
 import chatViTranslation from "@/languages/stream/chat-vi.json";
+import enTranslation from "@/languages/stream/en.json";
 import viTranslation from "@/languages/stream/vi.json";
 import { StreamVideo, StreamVideoClient } from "@stream-io/video-react-sdk";
 import { usePathname, useRouter } from "next/navigation";
@@ -126,13 +127,14 @@ const PublicStreamVideoProvider = ({ children }: { children: React.ReactNode }) 
     <Chat
       theme="str-chat__theme-dark"
       client={chatClient}
-      i18nInstance={i18nInstance}
+      i18nInstance={language === "vi" ? i18nInstance : undefined}
     >
       <StreamVideo
         client={videoClient}
-        language={language}
+        language={language === "vi" ? "vi" : "en"}
         translationsOverrides={{
           vi: viTranslation,
+          en: enTranslation,
         }}
       >
         {children}

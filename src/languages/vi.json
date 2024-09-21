@@ -48,7 +48,9 @@
       "title": "Phòng họp mới",
       "description": "Tạo phòng họp mới tức thì",
       "placeholder": "Nhập tiêu đề phòng họp hoặc mô tả",
-      "instantMeeting": "Phòng họp nhanh"
+      "instantMeeting": "Phòng họp nhanh",
+      "publicMeeting": "Phòng họp công khai",
+      "publicMeetingDescription": "Mọi người có thể tham gia phòng họp và sau 40 phút, phòng họp sẽ tự động đóng lại."
     },
     "scheduleMeeting": {
       "title": "Lên lịch",
