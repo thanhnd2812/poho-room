@@ -4,7 +4,7 @@ import { useGetCalls } from "@/hooks/use-get-calls";
 import { cn } from "@/lib/utils";
 import { Call, CallRecording } from "@stream-io/video-react-sdk";
 import { formatRelative, startOfDay } from "date-fns";
-import { en, vi } from "date-fns/locale";
+import { vi } from "date-fns/locale";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ interface CallListProps {
 const formatRelativeDate = (date: Date, isVietnamese: boolean) => {
   const today = new Date();
   const relativeDate = formatRelative(startOfDay(date), today, {
-    locale: isVietnamese ? vi : en,
+    locale: isVietnamese ? vi : undefined,
   }).split(isVietnamese ? "vào" : "at")[0];
   return relativeDate.charAt(0).toUpperCase() + relativeDate.slice(1);
 };
