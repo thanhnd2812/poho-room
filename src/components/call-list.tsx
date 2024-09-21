@@ -70,6 +70,7 @@ const CallList = ({ type }: CallListProps) => {
     if (type === "recordings") {
       fetchRecordings();
     }
+
   }, [callRecordings, type]);
 
   const calls = getCalls();
@@ -89,6 +90,7 @@ const CallList = ({ type }: CallListProps) => {
       </div>
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
+
           <MeetingCard
             key={(meeting as Call).id}
             title={
