@@ -47,7 +47,8 @@
     "newMeeting": {
       "title": "Start Instant Meeting",
       "description": "Start an instant meeting",
-      "placeholder": "Enter meeting room title or description"
+      "placeholder": "Enter meeting room title or description",
+      "instantMeeting": "Instant Meeting"
     },
     "scheduleMeeting": {
       "title": "Schedule Meeting",

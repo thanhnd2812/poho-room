@@ -47,7 +47,8 @@
     "newMeeting": {
       "title": "Phòng họp mới",
       "description": "Tạo phòng họp mới tức thì",
-      "placeholder": "Nhập tiêu đề phòng họp hoặc mô tả"
+      "placeholder": "Nhập tiêu đề phòng họp hoặc mô tả",
+      "instantMeeting": "Phòng họp nhanh"
     },
     "scheduleMeeting": {
       "title": "Lên lịch",

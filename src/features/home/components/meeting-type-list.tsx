@@ -43,6 +43,7 @@ interface MeetingTypeListProps {
   meetingCreated: string;
   meetingLinkCopied: string;
   time: string;
+  instantMeeting: string;
 }
 
 const MeetingTypeList = ({
@@ -69,7 +70,7 @@ const MeetingTypeList = ({
   meetingCreated,
   meetingLinkCopied,
   time,
-
+  instantMeeting,
 }: MeetingTypeListProps) => {
   const pathname = usePathname();
   // Determine the language based on the pathname
@@ -104,7 +105,7 @@ const MeetingTypeList = ({
 
       const startsAt =
         values.dateTime.toISOString() || new Date(Date.now()).toISOString();
-      const description = values.description || "Instant Meeting";
+      const description = values.description || instantMeeting;
 
       await call.getOrCreate({
         data: {
