@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { RoomType } from "@/constant/room-types";
 import { useProfile } from "@/hooks/use-profile";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { vi } from "date-fns/locale";
@@ -100,7 +101,7 @@ const MeetingTypeList = ({
       }
 
       const id = crypto.randomUUID();
-      const call = client.call("default", id);
+      const call = client.call(RoomType.DEFAULT, id);
       if (!call) throw new Error(createMeetingError);
 
       const startsAt =

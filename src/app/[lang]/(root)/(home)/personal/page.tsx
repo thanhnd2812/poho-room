@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { RoomType } from "@/constant/room-types";
 import { useGetCallById } from "@/hooks/use-get-call-by-id";
 import { useProfile } from "@/hooks/use-profile";
 import { useStreamVideoClient } from "@stream-io/video-react-sdk";
@@ -37,7 +38,7 @@ const PersonalRoomPage = () => {
     if (!client || !user) return;
 
     if (!call) {
-      const newCall = client.call("default", meetingId);
+      const newCall = client.call(RoomType.DEFAULT, meetingId);
       await newCall.getOrCreate({
         data: {
           starts_at: new Date().toISOString(),
