@@ -68,7 +68,13 @@ const MeetingSetup = ({
                 <Button
                   variant="ghost"
                   onClick={() => {
-                    navigator.clipboard.writeText(window.location.href);
+                    // copy current window location href without language prefix (e.g. /en/ -> /)
+                    const url = window.location.href;
+                    const urlWithoutLang = url.replace(
+                      /^(https?:\/\/[^\/]+)\/[a-z]{2}/,
+                      "$1"
+                    );
+                    navigator.clipboard.writeText(urlWithoutLang);
                     toast.success(t("meetingLinkCopied"));
                   }}
                 >

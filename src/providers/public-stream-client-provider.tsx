@@ -82,8 +82,13 @@ const PublicStreamVideoProvider = ({ children }: { children: React.ReactNode }) 
   const [user, setUser] = useState<ResponseType["data"] | null>(null);
 
   useEffect(() => {
-    setUser(realUser || fakeUser);
-  }, [realUser, fakeUser]);
+    if (isLoading) return;
+    if (realUser) {
+      setUser(realUser);
+    } else {
+      setUser(fakeUser);
+    }
+  }, [realUser, fakeUser, isLoading]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -119,7 +124,7 @@ const PublicStreamVideoProvider = ({ children }: { children: React.ReactNode }) 
       client.disconnectUser();
       chatClient.disconnectUser();
     };
-  }, [user, isLoading, router]);
+  }, [user, isLoading, router, language]);
 
   if (!chatClient || !videoClient) return <Loader />;
 

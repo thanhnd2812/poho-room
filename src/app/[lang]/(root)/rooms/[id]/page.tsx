@@ -5,7 +5,7 @@ import MeetingRoom from "@/features/room/components/meeting-room";
 import MeetingSetup from "@/features/room/components/meeting-setup";
 import { useGetCallById } from "@/hooks/use-get-call-by-id";
 import { useProfile } from "@/hooks/use-profile";
-import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
+import { BackgroundFiltersProvider, StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import { useState } from "react";
 interface MeetingPageProps {
   params: {
@@ -27,7 +27,9 @@ const MeetingPage = ({ params }: MeetingPageProps) => {
           {!isSetupComplete ? (
             <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
           ) : (
-            <MeetingRoom />
+              <BackgroundFiltersProvider>
+                <MeetingRoom />
+              </BackgroundFiltersProvider>
           )}
         </StreamTheme>
       </StreamCall>

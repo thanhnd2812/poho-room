@@ -105,7 +105,7 @@ const CallList = ({ type }: CallListProps) => {
   const noCallsMessage = getNoCallsMessage();
   if (isLoading) return <Loader />;
   return (
-    <div className="grid grid-cols-1  xl:grid-cols-2">
+    <div className="grid grid-cols-1 xl:grid-cols-2">
       <div
         className={cn("hidden ml-2", {
           "show-block": openRoomId,

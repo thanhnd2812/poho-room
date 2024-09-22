@@ -25,6 +25,7 @@ import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import BlurEffectButton from "./blur-effect-button";
 import EndCallButton from "./end-call-button";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
@@ -144,6 +145,9 @@ const MeetingRoom = () => {
         {/* <Hint text={t("transcription")}>
           <MyToggleTranscriptionButton />
         </Hint> */}
+        <Hint text={t("blurEffect")}>
+          <BlurEffectButton />
+        </Hint>
         <Hint text={t("showChat")}>
           <button onClick={() => setShowChat((prev) => !prev)}>
             <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">

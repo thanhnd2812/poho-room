@@ -114,7 +114,12 @@
     "hideChat": "Ẩn chat",
     "transcription": "Phiên âm",
     "startTranscription": "Bắt đầu phiên âm",
-    "stopTranscription": "Dừng phiên âm"
+    "stopTranscription": "Dừng phiên âm",
+    "blurEffect": "Hiệu ứng mờ",
+    "low": "Thấp",
+    "medium": "Trung bình",
+    "high": "Cao",
+    "none": "Không"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",

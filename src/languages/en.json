@@ -113,7 +113,12 @@
     "hideChat": "Hide chat",
     "transcription": "Transcription",
     "startTranscription": "Start transcription",
-    "stopTranscription": "Stop transcription"
+    "stopTranscription": "Stop transcription",
+    "blurEffect": "Blur Effect",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "none": "None"
   },
   "personalRoom": {
     "title": "Personal Room",
