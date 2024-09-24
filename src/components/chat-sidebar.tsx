@@ -1,7 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import {
   Channel,
@@ -29,6 +30,8 @@ export const ChatSidebar = ({
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const params = useParams();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+
   const roomId =
     previousMeetingId || (params.id as string) || searchParams.get("id");
   const { client, setActiveChannel } = useChatContext();
@@ -48,19 +51,15 @@ export const ChatSidebar = ({
   return (
     <div
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+      className={cn("fixed inset-0 z-50", {
+        "bg-background/80 backdrop-blur-sm": pathname.includes("previous"),
+      })}>
       <div className="fixed inset-y-0 right-0 w-full overflow-y-auto border-l bg-background shadow-lg md:w-96">
         <Channel>
           <Window>
             <ChannelHeader />
             <MessageList
-              messageActions={[
-                "edit",
-                "delete",
-                "flag",
-                "mute",
-                "pin",
-              ]}
+              messageActions={["edit", "delete", "flag", "mute", "pin"]}
             />
             {!previousMeetingId && <MessageInput focus />}
           </Window>

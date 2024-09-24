@@ -125,13 +125,14 @@ const MeetingTypeList = ({
       });
       setCallDetails(call);
 
-      if (!values.description) {
-        if (values.isPublic) {
-          router.push(`/public-rooms/${call.id}`);
-        } else {
+      if (values.isPublic) {
+        router.push(`/public-rooms/${call.id}`);
+      } else {
+        if (meetingState === MeetingType.INSTANT) {
           router.push(`/rooms/${call.id}`);
         }
       }
+
       toast.success(meetingCreated);
     } catch (error) {
       console.log(error);
@@ -180,8 +181,27 @@ const MeetingTypeList = ({
         buttonText={instantMeetingModalButtonText}
         handleClick={createMeeting}
       >
-        <div className="flex space-x-2 ml-4">
-          <Checkbox id="isPublic" checked={values.isPublic} onCheckedChange={(checked) => setValues({ ...values, isPublic: checked as boolean })} />
+        <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-2.5">
+            <label className="text-base text-normal leading-[22px] text-sky-2">
+              {scheduleMeetingModalAddDescription}
+            </label>
+            <Textarea
+              className="border-none bg-dark-3 focus-visible:ring-0 focus-visible:ring-offset-0"
+              onChange={(e) =>
+                setValues({ ...values, description: e.target.value })
+              }
+            />
+          </div>
+        </div>
+        <div className="flex space-x-2">
+          <Checkbox
+            id="isPublic"
+            checked={values.isPublic}
+            onCheckedChange={(checked) =>
+              setValues({ ...values, isPublic: checked as boolean })
+            }
+          />
           <div className="grid gap-1.5 leading-none">
             <label
               htmlFor="isPublic"
