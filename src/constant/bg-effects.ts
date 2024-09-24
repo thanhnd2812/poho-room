@@ -1,0 +1,11 @@
+export const BACKGROUND_EFFECT_URLS = [
+  "/images/bg-effects/bg-effect-1.jpg",
+  "/images/bg-effects/bg-effect-2.jpg",
+  "/images/bg-effects/bg-effect-3.jpg",
+  "/images/bg-effects/bg-effect-4.jpg",
+  "/images/bg-effects/bg-effect-5.jpg",
+  "/images/bg-effects/bg-effect-6.jpg",
+  "/images/bg-effects/bg-effect-7.jpg",
+  "/images/bg-effects/bg-effect-8.jpg",
+  "/images/bg-effects/bg-effect-9.jpg",
+]

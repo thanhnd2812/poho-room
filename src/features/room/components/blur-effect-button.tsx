@@ -5,16 +5,22 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { BACKGROUND_EFFECT_URLS } from "@/constant/bg-effects";
 import { useBackgroundFilters } from "@stream-io/video-react-sdk";
+import { ImageIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import React from "react";
 import { MdBlurOff, MdBlurOn } from "react-icons/md";
+
 type BlurStrength = "low" | "medium" | "high";
+type BackgroundEffect = BlurStrength | "none" | `image-${number}`;
 
 function BlurEffectButton() {
-  const [currentBlur, setCurrentBlur] = React.useState<BlurStrength | null>(
+  const [currentEffect, setCurrentEffect] = React.useState<BackgroundEffect | null>(
     null
   );
 
@@ -24,33 +30,42 @@ function BlurEffectButton() {
     isReady,
     applyBackgroundBlurFilter,
     disableBackgroundFilter,
+    applyBackgroundImageFilter,
+    backgroundImages,
   } = useBackgroundFilters();
 
   if (!isSupported || !isReady) {
     return null; // Or render a disabled select
   }
 
-  const handleBlurChange = (value: BlurStrength | "none") => {
-    if (value === "none") {
+  const handleBlurChange = (effect: BackgroundEffect) => {
+    if (effect === "none") {
       disableBackgroundFilter();
-      setCurrentBlur(null);
+    } else if (["low", "medium", "high"].includes(effect)) {
+      applyBackgroundBlurFilter(effect as BlurStrength);
     } else {
-      applyBackgroundBlurFilter(value);
-      setCurrentBlur(value);
+
+      const imageIndex = parseInt(effect.split("-")[1]);
+      applyBackgroundImageFilter(BACKGROUND_EFFECT_URLS[imageIndex]);
     }
+    setCurrentEffect(effect);
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="mb-2 py-0 bg-[#19232D]">
-          {currentBlur ? (
+          {currentEffect === "none" ? (
             <>
-              <MdBlurOn className="h-5 w-5" />
+              <MdBlurOff className="mr-2 h-4 w-4" />
+            </>
+          ) : currentEffect?.startsWith("image-") ? (
+            <>
+              <ImageIcon className="mr-2 h-4 w-4" />
             </>
           ) : (
             <>
-              <MdBlurOff className="h-5 w-5" />
+              <MdBlurOn className="mr-2 h-4 w-4" />
             </>
           )}
         </Button>
@@ -72,6 +87,23 @@ function BlurEffectButton() {
           <MdBlurOn className="mr-2 h-4 w-4 opacity-90" />
           <span>{t("high")}</span>
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        {backgroundImages &&
+          backgroundImages.map((image, index) => (
+            <DropdownMenuItem
+              key={image}
+              onClick={() => handleBlurChange(`image-${index}`)}
+            >
+              <Image
+                src={image}
+                alt="Background Image"
+                className="mr-2 h-4 w-4"
+                width={16}
+                height={16}
+              />
+              <span>{t("backgroundName", { index: index + 1 })}</span>
+            </DropdownMenuItem>
+          ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -118,7 +118,8 @@
     "low": "Low",
     "medium": "Medium",
     "high": "High",
-    "none": "None"
+    "none": "None",
+    "backgroundName": "Background {index}"
   },
   "personalRoom": {
     "title": "Personal Room",

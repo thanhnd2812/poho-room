@@ -119,7 +119,8 @@
     "low": "Thấp",
     "medium": "Trung bình",
     "high": "Cao",
-    "none": "Không"
+    "none": "Không",
+    "backgroundName": "Hình nền {index}"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",
