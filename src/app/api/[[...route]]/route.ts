@@ -2,6 +2,7 @@ export const runtime = "nodejs";
 
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
+import chatRoutes from "./chat";
 import { sessionCheck } from "./middleware";
 import profileRoutes from "./profiles";
 import roomsRoutes from "./rooms";
@@ -12,7 +13,8 @@ const publicApiRoutes = [
   "/auth/phone-login",
   "/auth/google-login",
   "/auth/forgot-password",
-  "auth/verify-email",
+  "/auth/verify-email",
+  "/webhooks/stream/ai",
 ];
 
 const app = new Hono().basePath("/api");
@@ -27,7 +29,8 @@ app.use("*", (c, next) => {
 const routes = app
   .route("/auth", authRoutes)
   .route("/profiles", profileRoutes)
-  .route("/rooms", roomsRoutes);
+  .route("/rooms", roomsRoutes)
+  .route("/webhooks", chatRoutes);
 
 export const GET = handle(app);
 export const POST = handle(app);

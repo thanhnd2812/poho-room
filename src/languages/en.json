@@ -119,7 +119,9 @@
     "medium": "Medium",
     "high": "High",
     "none": "None",
-    "backgroundName": "Background {index}"
+    "backgroundName": "Background {index}",
+    "close": "Close",
+    "chatbot": "PAI - AI assistant"
   },
   "personalRoom": {
     "title": "Personal Room",

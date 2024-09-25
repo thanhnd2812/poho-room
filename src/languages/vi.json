@@ -120,7 +120,9 @@
     "medium": "Trung bình",
     "high": "Cao",
     "none": "Không",
-    "backgroundName": "Hình nền {index}"
+    "backgroundName": "Hình nền {index}",
+    "close": "Đóng",
+    "chatbot": "PAI - Trợ lý AI"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",
