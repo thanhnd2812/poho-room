@@ -3,6 +3,7 @@ import {
   AI_PROVIDERS,
   CHAT_GPT_MODEL,
   DEFAULT_AI_USER_ID,
+  DEFAULT_CHANNEL_TYPE,
   STREAM_AI_CHANNEL_EVENT_TYPE
 } from "@/constant/stream";
 import { Hono } from "hono";
@@ -16,6 +17,8 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+const CHANNEL_TYPE = process.env.STREAM_CHANNEL_TYPE || DEFAULT_CHANNEL_TYPE;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function formatMessageForVisionAPI(msg: MessageResponse) {
@@ -170,6 +173,32 @@ const app = new Hono()
       }
 
       const event = body;
+
+      if (event.type === "call.ended" || event.type === "call.session_ended") {
+        // get call id, it's also the channel id
+        const callId = event.call.id;
+        const creatorId = event.call.created_by.id;
+        if (creatorId !== callId) {
+          return c.json(
+            {
+              success: true,
+              message: "Not personal room",
+            },
+            200
+          );
+        }
+        const channel = client.channel(CHANNEL_TYPE, callId);
+        await channel.watch();
+        await channel.truncate();
+        return c.json(
+          {
+            success: true,
+            message: "OK",
+          },
+          200
+        );
+      }
+
       if (
         event.type !== "message.new" ||
         !event.message ||
@@ -222,6 +251,6 @@ const app = new Hono()
         200
       );
     }
-  );
+);
 
 export default app;

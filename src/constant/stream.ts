@@ -1,4 +1,4 @@
-export const DEFAULT_CHANNEL_TYPE = "messaging";
+export const DEFAULT_CHANNEL_TYPE = "livestream";
 export const DEFAULT_AI_USER_ID = "PAI";
 export enum AI_PROVIDERS {
   OPENAI = "openai",
