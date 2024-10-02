@@ -104,7 +104,7 @@ const MeetingSetup = ({
           <Button
             variant="outline"
             onClick={changeName}
-            className="rounded-md px-4 py-2.5 text-white"
+            className="rounded-md px-4 py-2.5"
           >
             {t("update")}
           </Button>

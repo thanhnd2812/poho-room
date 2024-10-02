@@ -103,7 +103,7 @@ export const ChatSidebar = ({
               <Button
                 variant="ghost"
                 onClick={toggleChatbot}
-                className={cn("absolute top-2 right-12 hidden", {
+                className={cn("absolute top-2 right-12", {
                   "bg-primary text-white": isChatbot,
                 })}
                 size="icon"
