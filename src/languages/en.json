@@ -94,7 +94,8 @@
     "joinWithCameraAndMicrophoneOff": "Join with camera and microphone off",
     "joinMeeting": "Join Meeting",
     "copyLink": "Copy Link",
-    "meetingLinkCopied": "Meeting link copied to clipboard"
+    "meetingLinkCopied": "Meeting link copied to clipboard",
+    "update": "Update"
   },
   "meetingRoom": {
     "layout": {

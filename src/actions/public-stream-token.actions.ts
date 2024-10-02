@@ -21,3 +21,21 @@ export const getPublicStreamToken = async (id?: string) => {
 
   return token;
 };
+
+export const updateUserFullname = async (id: string, fullname: string) => {
+  if (!apiKey || !apiSecret) {
+    throw new Error("No API key or secret");
+  }
+
+  const client = new StreamClient(apiKey, apiSecret);
+  client.updateUsersPartial({
+    users: [
+      {
+        id,
+        set: {
+          name: fullname,
+        },
+      },
+    ],
+  });
+};

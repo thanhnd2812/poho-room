@@ -16,7 +16,6 @@ interface MeetingPageProps {
 const PublicMeetingPage = ({ params }: MeetingPageProps) => {
   const [isSetupComplete, setIsSetupComplete] = useState(false);
   const { call, isCallLoading } = useGetCallById(params.id);
-
   if (isCallLoading) return <Loader />;
 
   return (
@@ -24,7 +23,7 @@ const PublicMeetingPage = ({ params }: MeetingPageProps) => {
       <StreamCall call={call}>
         <StreamTheme as="main">
           {!isSetupComplete ? (
-            <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
+            <MeetingSetup setIsSetupComplete={setIsSetupComplete}/>
           ) : (
             <BackgroundFiltersProvider
               backgroundImages={BACKGROUND_EFFECT_URLS}

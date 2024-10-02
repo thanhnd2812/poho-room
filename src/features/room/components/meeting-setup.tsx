@@ -1,12 +1,20 @@
 "use client";
 
+import { updateUserFullname } from "@/actions/public-stream-token.actions";
 import { PulseBeams } from "@/components/pulse-beam";
 import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   DeviceSettings,
   useCall,
-  VideoPreview,
+  useConnectedUser,
+  VideoPreview
 } from "@stream-io/video-react-sdk";
 import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -18,13 +26,26 @@ const MeetingSetup = ({
 }: {
   setIsSetupComplete: (isSetupComplete: boolean) => void;
 }) => {
+  const connectedUser = useConnectedUser();
   const [isMicCamToggledOn, setIsMicCamToggledOn] = useState(false);
   const t = useTranslations("meetingSetup");
   const call = useCall();
+  const [name, setName] = useState(connectedUser?.name);
 
   if (!call) {
     throw new Error("Call not found");
   }
+
+  const changeName = () => {
+    if (!connectedUser || !name || name.length < 5) return;
+    updateUserFullname(connectedUser.id, name);
+  };
+
+  useEffect(() => {
+    if (connectedUser) {
+      setName(connectedUser.name);
+    }
+  }, [connectedUser]);
 
   useEffect(() => {
     if (isMicCamToggledOn) {
@@ -53,20 +74,11 @@ const MeetingSetup = ({
           <DeviceSettings />
         </div>
         <div className="flex items-center gap-3">
-          <Button
-            onClick={() => {
-              call?.join();
-              setIsSetupComplete(true);
-            }}
-            className="rounded-md px-4 py-2.5 text-white"
-          >
-            {t("joinMeeting")}
-          </Button>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   onClick={() => {
                     // copy current window location href without language prefix (e.g. /en/ -> /)
                     const url = window.location.href;
@@ -84,6 +96,29 @@ const MeetingSetup = ({
               <TooltipContent>{t("copyLink")}</TooltipContent>
             </Tooltip>
           </TooltipProvider>
+          <Input
+            className="w-48"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Button
+            variant="outline"
+            onClick={changeName}
+            className="rounded-md px-4 py-2.5 text-white"
+          >
+            {t("update")}
+          </Button>
+        </div>
+        <div className="flex items-center gap-3 mt-3 w-96">
+          <Button
+            onClick={() => {
+              call?.join();
+              setIsSetupComplete(true);
+            }}
+            className="rounded-md px-4 py-2.5 text-white w-full"
+          >
+            {t("joinMeeting")}
+          </Button>
         </div>
       </div>
     </PulseBeams>

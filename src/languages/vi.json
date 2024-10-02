@@ -94,7 +94,8 @@
     "joinWithCameraAndMicrophoneOff": "Tham gia với camera và microphone",
     "joinMeeting": "Tham gia phòng họp",
     "copyLink": "Sao chép liên kết",
-    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm"
+    "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
+    "update": "Cập nhật"
   },
   "meetingRoom": {
     "layout": {
