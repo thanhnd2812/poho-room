@@ -23,7 +23,32 @@
       "passwordPlaceholder": "your password",
       "passwordFieldError": "Password must be at least 8 characters",
       "login": "Login",
-      "loginError": "User credentials are incorrect"
+      "loginError": "User credentials are incorrect",
+      "dontHaveAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "signUp": {
+      "title": "Sign up",
+      "alreadyHaveAccount": "Already have an account?",
+      "login": "Login",
+      "fullname": "Full name",
+      "fullnamePlaceholder": "Your full name",
+      "fullnameFieldError": "Please enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "example@gmail.com",
+      "emailFieldError": "Please enter a valid email address",
+      "password": "Password",
+      "passwordPlaceholder": "your password", 
+      "passwordFieldError": "Password must be at least 8 characters",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "your password",
+      "confirmPasswordFieldError": "Password must be at least 8 characters or not match",
+      "confirmPasswordFieldErrorMatch": "Passwords don't match",
+      "buttonLabel": "Sign up",
+      "bySigningUpYouAgreeToOur": "By signing up, you agree to our",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy",
+      "and": "and"
     },
     "forgotPassword": {
       "title": "Forgot password",
@@ -95,7 +120,7 @@
     "joinMeeting": "Join Meeting",
     "copyLink": "Copy Link",
     "meetingLinkCopied": "Meeting link copied to clipboard",
-    "update": "Update"
+    "update": "Update name"
   },
   "meetingRoom": {
     "layout": {

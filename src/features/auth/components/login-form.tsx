@@ -1,7 +1,9 @@
 
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SupportedLanguage } from "@/constant/locales";
 import { getLanguage } from "@/languages";
+import Link from "next/link";
 import EmailLoginForm from "./email-login-form";
 import GoogleSignInButton from "./google-sign-in-button";
 import PhoneLoginForm from "./phone-login-form";
@@ -46,7 +48,9 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
             {/* Login with phone number */}
             <PhoneLoginForm
               phoneNumberLabel={language.auth.login.phoneNumber}
-              phoneNumberPlaceholder={language.auth.login.phoneNumberPlaceholder}
+              phoneNumberPlaceholder={
+                language.auth.login.phoneNumberPlaceholder
+              }
               passwordLabel={language.auth.login.password}
               passwordPlaceholder={language.auth.login.passwordPlaceholder}
               buttonLabel={language.auth.login.login}
@@ -56,6 +60,14 @@ const LoginForm = async ({ lang }: LoginFormProps) => {
             />
           </TabsContent>
         </Tabs>
+      </div>
+      {/* Sign up */}
+      <div className="flex items-center justify-start gap-x-2 w-full">
+        <Link href="/sign-up" className="w-full">
+          <Button variant="outline" className="w-full">
+            {language.auth.login.signUp}
+          </Button>
+        </Link>
       </div>
       <div className="flex items-center justify-center gap-x-2 w-full">
         <div className="h-[1px] w-full bg-zinc-200 dark:bg-zinc-700"></div>
