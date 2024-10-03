@@ -23,15 +23,27 @@ function getLocale(request: NextRequest): string {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // Skip API routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
-  
+
+  // check if the request is for email verification, including mode=verifyEmail, oobCode=xxx
+
+  const isEmailVerification =
+    request.url.includes("mode=verifyEmail") && request.url.includes("oobCode=");
+  if (isEmailVerification) {
+    // redirect to the verify-email page
+    const oobCode = request.url.split("oobCode=")[1];
+    console.log("oobCode", oobCode);
+
+    return NextResponse.redirect(new URL(`/verify-email?oobCode=${oobCode}`, request.url));
+  }
+
   // Handle internationalization first
   const response = await intlMiddleware(request);
-  
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );

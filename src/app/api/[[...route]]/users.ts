@@ -23,7 +23,7 @@ const app = new Hono()
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await sendEmailVerification(userCredential.user, {
-        url: process.env.NEXT_PUBLIC_APP_URL + "/verify-email",
+        url: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
       });
       const hashedPassword = await encryptPassword(password);
 
@@ -84,6 +84,7 @@ const app = new Hono()
           email,
           password
         );
+
         const user = {
           id: userCredential.user.uid,
         };
