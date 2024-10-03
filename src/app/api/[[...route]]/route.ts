@@ -10,6 +10,7 @@ import authRoutes from "./users";
 
 const publicApiRoutes = [
   "/auth/email-login",
+  "/auth/email-signup",
   "/auth/phone-login",
   "/auth/google-login",
   "/auth/forgot-password",

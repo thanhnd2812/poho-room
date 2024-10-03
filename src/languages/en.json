@@ -48,7 +48,9 @@
       "bySigningUpYouAgreeToOur": "By signing up, you agree to our",
       "termsOfService": "Terms of Service",
       "privacyPolicy": "Privacy Policy",
-      "and": "and"
+      "and": "and",
+      "signupError": "Failed to sign up",
+      "signupSuccess": "Sign up successfully. Please check your email for verification."
     },
     "forgotPassword": {
       "title": "Forgot password",

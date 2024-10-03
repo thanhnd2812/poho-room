@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { defaultLocale, locales } from "./constant/locales";
 import { routing } from "./i18n/routing";
 
-const publicRoutes = ["/login", "/verify-email", "/reset-password"];
+const publicRoutes = ["/login", "/verify-email", "/reset-password", "/email-signup"];
 const intlMiddleware = createIntlMiddleware(routing);
 
 /**

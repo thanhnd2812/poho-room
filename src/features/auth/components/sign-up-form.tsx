@@ -8,28 +8,30 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
+import { useEmailSignup } from "../hooks/use-email-signup";
 
 // form schema for fullname, email, password, confirm password. Note that, confirm password and password must be the same
-
-
+const formSchema = z
+  .object({
+    fullname: z.string().min(1).max(50),
+    email: z.string().email(),
+    password: z.string().min(8).max(50),
+    confirmPassword: z.string().min(8).max(50),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+  });
 
 const SignUpForm = () => {
+  const router = useRouter();
+
   const t = useTranslations("auth.signUp");
-  const formSchema = z
-    .object({
-      fullname: z.string().min(1).max(50),
-      email: z.string().email(),
-      password: z.string().min(8).max(50),
-      confirmPassword: z.string().min(8).max(50),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: t("confirmPasswordFieldErrorMatch"),
-      path: ["confirmPassword"],
-    });
-  
+  const { mutate: signup, isPending } = useEmailSignup();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,8 +53,15 @@ const SignUpForm = () => {
   };
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(form.formState.errors);
-    console.log(values);
+    signup(values, {
+      onSuccess: () => {
+        toast.success(t("signupSuccess"));
+        router.push("/login");
+      },
+      onError: () => {
+        toast.error(t("signupError"));
+      },
+    });
   };
 
   return (
@@ -201,7 +210,7 @@ const SignUpForm = () => {
             />
 
             <Button
-              disabled={false}
+              disabled={isPending}
               className="w-full dark:text-white h-12"
               type="submit"
             >

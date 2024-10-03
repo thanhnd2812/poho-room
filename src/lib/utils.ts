@@ -26,3 +26,7 @@ export function generateAnonymousProfile() {
     phone: "0909090909",
   };
 }
+// Generate a random number with 9 digits
+export function generateAffiliateId() {
+  return Math.floor(Math.random() * 1000000000);
+}

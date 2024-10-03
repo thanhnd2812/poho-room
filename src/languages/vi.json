@@ -48,7 +48,9 @@
       "bySigningUpYouAgreeToOur": "Bằng cách đăng ký, bạn đồng ý với",
       "termsOfService": "Điều khoản dịch vụ",
       "privacyPolicy": "Chính sách bảo mật",
-      "and": "và"
+      "and": "và",
+      "signupError": "Đăng ký không thành công",
+      "signupSuccess": "Đăng ký thành công. Vui lòng kiểm tra email của bạn để xác nhận."
     },
     "forgotPassword": {
       "title": "Quên mật khẩu",

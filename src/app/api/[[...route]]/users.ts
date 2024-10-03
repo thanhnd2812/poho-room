@@ -1,8 +1,10 @@
 import { getUserByPhoneAndPassword } from "@/lib/dal/user";
-import { auth } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { clearSession, setSession } from "@/lib/session";
+import { encryptPassword, generateAffiliateId } from "@/lib/utils";
 import { zValidator } from "@hono/zod-validator";
-import { GoogleAuthProvider, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, verifyPasswordResetCode } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, verifyPasswordResetCode } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { Context, Hono } from "hono";
 import { JWTPayload } from "jose";
 import { z } from "zod";
@@ -12,6 +14,59 @@ interface CustomContext extends Context {
 }
 
 const app = new Hono()
+  .post("/email-signup", zValidator("json", z.object({
+    fullname: z.string().min(1).max(50).trim(),
+    email: z.string().email().trim(),
+    password: z.string().min(8).trim(),
+  })), async (c) => {
+    const { fullname, email, password } = c.req.valid("json");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await sendEmailVerification(userCredential.user, {
+        url: process.env.NEXT_PUBLIC_APP_URL + "/verify-email",
+      });
+      const hashedPassword = await encryptPassword(password);
+
+      const user = {
+        id: userCredential.user.uid,
+        password: hashedPassword,
+        fullname,
+        email,
+        signInMethod: "email",
+        address: null,
+        allow_show_email: true,
+        allow_show_phone: true,
+        allow_show_location: true,
+        children: null,
+        fcm_token: [],
+        parentId: null,
+        points: 30,
+        createdAt: new Date().getTime(),
+        updatedAt: new Date().getTime(),
+        affiliateId: `${generateAffiliateId()}`,
+      };
+
+      const userDoc = doc(db, "users", userCredential.user.uid);
+      await setDoc(userDoc, user);
+
+      return c.json({
+        success: true,
+        message: "Signup successfully",
+        user: {
+          id: userCredential.user.uid,
+        },
+      });
+    } catch (error) {
+      console.log("email-signup", error);
+      return c.json(
+        {
+          success: false,
+          message: "Signup failed",
+        },
+        401
+      );
+    }
+  })
   .post(
     "/email-login",
     zValidator(
