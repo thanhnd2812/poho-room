@@ -52,6 +52,15 @@
       "signupError": "Đăng ký không thành công",
       "signupSuccess": "Đăng ký thành công. Vui lòng kiểm tra email của bạn để xác nhận."
     },
+    "verifyEmail": {
+      "title": "Xác nhận email",
+      "description": "Vui lòng kiểm tra email của bạn để xác nhận địa chỉ email.",
+      "emailVerified": "Email đã được xác nhận",
+      "emailNotVerified": "Email không được xác nhận",
+      "emailVerifiedDescription": "Email của bạn đã được xác nhận thành công. Bạn có thể đăng nhập vào hệ thống.",
+      "emailNotVerifiedDescription": "Email của bạn không được xác nhận. Vui lòng kiểm tra lại email và xác nhận email.",
+      "login": "Đăng nhập"
+    },
     "forgotPassword": {
       "title": "Quên mật khẩu",
       "description": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu.",

@@ -1,3 +1,5 @@
+
+import VerifyEmailForm from "@/features/auth/components/verify-email-form";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -9,7 +11,7 @@ const Page = () => {
     redirect("/");
   }
 
-  return <div>Verify Email</div>;
+  return <VerifyEmailForm />
 }
 
 export default Page

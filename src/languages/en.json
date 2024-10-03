@@ -52,6 +52,15 @@
       "signupError": "Failed to sign up",
       "signupSuccess": "Sign up successfully. Please check your email for verification."
     },
+    "verifyEmail": {
+      "title": "Verify email",
+      "description": "Please check your email for the verification link.",
+      "emailVerified": "Email verified",
+      "emailNotVerified": "Email not verified",
+      "emailVerifiedDescription": "Your email has been verified successfully. You can login to the system.",
+      "emailNotVerifiedDescription": "Your email is not verified. Please check your email for the verification link.",
+      "login": "Login"
+    },
     "forgotPassword": {
       "title": "Forgot password",
       "description": "Enter your email address and we will send you a link to reset your password.",

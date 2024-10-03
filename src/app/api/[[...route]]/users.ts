@@ -3,7 +3,7 @@ import { auth, db } from "@/lib/firebase";
 import { clearSession, setSession } from "@/lib/session";
 import { encryptPassword, generateAffiliateId } from "@/lib/utils";
 import { zValidator } from "@hono/zod-validator";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, verifyPasswordResetCode } from "firebase/auth";
+import { applyActionCode, createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Context, Hono } from "hono";
 import { JWTPayload } from "jose";
@@ -236,18 +236,18 @@ const app = new Hono()
     async (c) => {
     const { code } = c.req.valid("json");
     try {
-      const email = await verifyPasswordResetCode(auth, code);
+      // const email = await verifyPasswordResetCode(auth, code);
+      await applyActionCode(auth, code);
       return c.json({
         success: true,
-        message: "Email verification sent",
-        email,
+        message: "Email verified",
       });
     } catch (error) {
       console.log("verify-email", error);
       return c.json(
-        {
-          success: false,
-          message: "Verify email failed",
+          {
+            success: false,
+            message: "Verify email failed",
           },
           401
         );
