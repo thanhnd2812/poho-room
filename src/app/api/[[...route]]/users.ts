@@ -27,8 +27,9 @@ const app = new Hono()
       });
       const hashedPassword = await encryptPassword(password);
 
+
       const user = {
-        id: userCredential.user.uid,
+        uid: userCredential.user.uid,
         password: hashedPassword,
         fullname,
         email,
