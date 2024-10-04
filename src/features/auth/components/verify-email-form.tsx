@@ -57,13 +57,7 @@ const VerifyEmailForm = () => {
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">
                   {t("emailVerifiedDescription")}
                 </p>
-                <Link href="/login">
-                  <Button>
-                    {t("login")}
-                  </Button>
-                </Link>
               </div>
-                
             ) : (
               <div className="flex flex-col items-center justify-center gap-y-2">
                 <h1 className="text-lg font-medium text-zinc-800 dark:text-white">
