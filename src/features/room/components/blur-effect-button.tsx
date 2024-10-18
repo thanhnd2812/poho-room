@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -54,21 +53,25 @@ function BlurEffectButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="mb-2 py-0 bg-[#19232D]">
-          {currentEffect === "none" ? (
-            <>
-              <MdBlurOff className="mr-2 h-4 w-4" />
-            </>
-          ) : currentEffect?.startsWith("image-") ? (
-            <>
-              <ImageIcon className="mr-2 h-4 w-4" />
-            </>
-          ) : (
-            <>
-              <MdBlurOn className="mr-2 h-4 w-4" />
-            </>
-          )}
-        </Button>
+        <button>
+          <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+            {/* <Users size={20} className="text-white" /> */}
+
+            {currentEffect === "none" ? (
+              <>
+                <MdBlurOff size={20} />
+              </>
+            ) : currentEffect?.startsWith("image-") ? (
+              <>
+                <ImageIcon size={20} />
+              </>
+            ) : (
+              <>
+                <MdBlurOn size={20} />
+              </>
+            )}
+          </div>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem onClick={() => handleBlurChange("none")}>

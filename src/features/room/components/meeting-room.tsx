@@ -3,7 +3,6 @@
 import { ChatSidebar } from "@/components/chat-sidebar";
 import Hint from "@/components/hint";
 import Loader from "@/components/loader";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +36,7 @@ const MeetingRoom = () => {
   const t = useTranslations("meetingRoom");
   const searchParams = useSearchParams();
   const isPersonalRoom = !!searchParams.get("personal");
-  const [layout, setLayout] = useState<CallLayoutType>("speaker-left");
+  const [layout, setLayout] = useState<CallLayoutType>("grid");
   const [showParticipants, setShowParticipants] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
@@ -116,11 +115,16 @@ const MeetingRoom = () => {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-
+        <Hint text={t("showParticipants")}>
+          <button onClick={() => setShowParticipants((prev) => !prev)}>
+            <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+              <Users size={20} className="text-white" />
+            </div>
+          </button>
+        </Hint>
         <Hint text={t("copyRoomLink")}>
-          <Button
+          <button
             className="rounded-full bg-[#19232D] hover:bg-[#4c535b]"
-            variant="outline"
             onClick={() => {
               // copy current window location href without language prefix (e.g. /en/ -> /)
               const url = window.location.href;
@@ -132,16 +136,12 @@ const MeetingRoom = () => {
               toast.success(t("meetingLinkCopied"));
             }}
           >
-            <Copy size={16} />
-          </Button>
-        </Hint>
-        <Hint text={t("showParticipants")}>
-          <button onClick={() => setShowParticipants((prev) => !prev)}>
             <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
-            <Users size={20} className="text-white" />
+              <Copy size={20} />
             </div>
           </button>
         </Hint>
+
         {/* <Hint text={t("transcription")}>
           <MyToggleTranscriptionButton />
         </Hint> */}
@@ -151,9 +151,9 @@ const MeetingRoom = () => {
         <Hint text={t("showChat")}>
           <button onClick={() => setShowChat((prev) => !prev)}>
             <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
-            <MessageCircle size={20} className="text-white" />
-          </div>
-        </button>
+              <MessageCircle size={20} className="text-white" />
+            </div>
+          </button>
         </Hint>
         {!isPersonalRoom && <EndCallButton />}
       </div>

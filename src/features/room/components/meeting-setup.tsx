@@ -36,9 +36,10 @@ const MeetingSetup = ({
     throw new Error("Call not found");
   }
 
-  const changeName = () => {
+  const changeName = async () => {
     if (!connectedUser || !name || name.length < 5) return;
-    updateUserFullname(connectedUser.id, name);
+    await updateUserFullname(connectedUser.id, name);
+    toast.success(t("nameUpdated"));
   };
 
   useEffect(() => {

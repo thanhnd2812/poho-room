@@ -131,7 +131,8 @@
     "joinMeeting": "Join Meeting",
     "copyLink": "Copy Link",
     "meetingLinkCopied": "Meeting link copied to clipboard",
-    "update": "Update name"
+    "update": "Update name",
+    "nameUpdated": "Name updated successfully"
   },
   "meetingRoom": {
     "layout": {

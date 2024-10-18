@@ -131,7 +131,8 @@
     "joinMeeting": "Tham gia phòng họp",
     "copyLink": "Sao chép liên kết",
     "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
-    "update": "Đổi tên"
+    "update": "Đổi tên",
+    "nameUpdated": "Tên đã được cập nhật thành công"
   },
   "meetingRoom": {
     "layout": {
