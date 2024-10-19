@@ -120,6 +120,7 @@ const MeetingTypeList = ({
           custom: {
             description,
             is_public: values.isPublic,
+            created_by: user.uid,
           },
         },
       });

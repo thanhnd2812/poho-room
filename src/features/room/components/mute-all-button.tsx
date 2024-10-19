@@ -2,35 +2,30 @@
 
 import { Button } from "@/components/ui/button";
 import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
-import { useRouter } from "next/navigation";
 
-const EndCallButton = () => {
+const MuteAllButton = () => {
   const call = useCall();
-  const router = useRouter();
-
+    
   const { useLocalParticipant } = useCallStateHooks();
   const localParticipant = useLocalParticipant();
 
   const isMeetingOwner =
     localParticipant &&
     call?.state.createdBy &&
-    (localParticipant.userId as string).includes(call?.state.createdBy.id);
-
-  console.log({ userId: localParticipant?.userId, createdBy: call?.state.createdBy });
+    (localParticipant.userId as string).includes(call.state.createdBy.id);
 
   if (!isMeetingOwner) return null;
 
   return (
     <Button
       onClick={async () => {
-        await call.endCall();
-        router.push("/");
+        await call.muteOthers("audio");
       }}
       className="bg-red-500"
     >
-      End call for everyone
+      Mute all
     </Button>
   );
 };
 
-export default EndCallButton;
+export default MuteAllButton;

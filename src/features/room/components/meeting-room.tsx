@@ -20,13 +20,14 @@ import {
 } from "@stream-io/video-react-sdk";
 import { Copy, LayoutList, MessageCircle, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { toast } from "sonner";
 import BlurEffectButton from "./blur-effect-button";
 import { CustomCallControlsButton } from "./custom-call-controls-button";
 import EndCallButton from "./end-call-button";
+import MuteAllButton from "./mute-all-button";
 import ZoomLayout from "./zoom-layout";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right" | "zoom";
@@ -36,8 +37,8 @@ const MeetingRoom = () => {
   const callCallingState = useCallCallingState();
   const router = useRouter();
   const t = useTranslations("meetingRoom");
-  const searchParams = useSearchParams();
-  const isPersonalRoom = !!searchParams.get("personal");
+  // const searchParams = useSearchParams();
+  // const isPersonalRoom = !!searchParams.get("personal");
   const [layout, setLayout] = useState<CallLayoutType>("grid");
   const [showParticipants, setShowParticipants] = useState(false);
   const [showChat, setShowChat] = useState(false);
@@ -165,7 +166,9 @@ const MeetingRoom = () => {
             </div>
           </button>
         </Hint>
-        {!isPersonalRoom && <EndCallButton />}
+        {/* {!isPersonalRoom && <EndCallButton />} */}
+        <EndCallButton />
+        <MuteAllButton />
       </div>
     </section>
   );

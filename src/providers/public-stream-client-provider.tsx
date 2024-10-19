@@ -101,7 +101,7 @@ const PublicStreamVideoProvider = ({ children }: { children: React.ReactNode }) 
         id: user.uid,
         name: user.fullname,
         image: user.avatarUrl,
-        type: "guest",
+        // type: "guest",
         language: language,
       },
       tokenProvider: async () => getPublicStreamToken(user.uid),
@@ -114,7 +114,7 @@ const PublicStreamVideoProvider = ({ children }: { children: React.ReactNode }) 
         name: user.fullname,
         imageUrl: user.avatarUrl,
         language: language,
-        type: "guest",
+        // type: "guest",
       },
       async () => getPublicStreamToken(user.uid)
     );
