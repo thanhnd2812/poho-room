@@ -138,7 +138,8 @@
     "layout": {
       "grid": "Grid",
       "speaker-left": "Speaker-Left",
-      "speaker-right": "Speaker-Right"
+      "speaker-right": "Speaker-Right",
+      "zoom": "Speaker-Bottom"
     },
     "copyRoomLink": "Copy room link",
     "meetingLinkCopied": "Meeting link copied to clipboard",

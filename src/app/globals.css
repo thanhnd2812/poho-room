@@ -164,3 +164,63 @@ html, body, :root {
     width: 100%;
   }
 }
+
+/* Zoom Layout Styles */
+.zoom-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.zoom-layout .spotlight {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding-bottom: 80px;
+}
+
+.zoom-layout .spotlight .str-video__participant-view {
+  height: 100%;
+  width: auto;
+  aspect-ratio: auto;
+  max-height: calc(100% - 80px);
+}
+
+.zoom-layout .spotlight .str-video__participant-view--no-video {
+  width: 100%;
+}
+
+.zoom-layout .participants-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  height: 160px;
+  min-height: 160px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+.zoom-layout .participants-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.zoom-layout .participants-bar .participant-tile {
+  width: 240px;
+  min-width: 240px;
+}
+
+.zoom-layout .participants-bar .participant-tile .str-video__participant-view {
+  aspect-ratio: auto;
+}
+
+.zoom-layout .participants-bar .participant-tile:first-child {
+  margin-left: auto;
+}
+
+.zoom-layout .participants-bar .participant-tile:last-child {
+  margin-right: auto;
+}

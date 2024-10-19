@@ -22,12 +22,14 @@ import { Copy, LayoutList, MessageCircle, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { toast } from "sonner";
 import BlurEffectButton from "./blur-effect-button";
 import { CustomCallControlsButton } from "./custom-call-controls-button";
 import EndCallButton from "./end-call-button";
+import ZoomLayout from "./zoom-layout";
 
-type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
+type CallLayoutType = "grid" | "speaker-left" | "speaker-right" | "zoom";
 
 const MeetingRoom = () => {
   const { useCallCallingState } = useCallStateHooks();
@@ -61,10 +63,18 @@ const MeetingRoom = () => {
         return <PaginatedGridLayout />;
       case "speaker-left":
         return <SpeakerLayout participantsBarPosition={"right"} />;
-      default:
+      case "speaker-right":
         return <SpeakerLayout participantsBarPosition={"left"} />;
+      case "zoom":
+        return <ZoomLayout />;
+      default:
+        return <PaginatedGridLayout />;
     }
   };
+
+  const availableLayouts = isMobile
+    ? ["Grid", "Zoom"]
+    : ["Grid", "Speaker-Left", "Speaker-Right", "Zoom"];
 
   return (
     <section className="relative h-screen w-full overflow-hidden pt-4 text-white bg-slate-500 dark:bg-slate-800">
@@ -100,7 +110,7 @@ const MeetingRoom = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent className="border-dark-1 bg-dark-1 text-white">
-            {["Grid", "Speaker-Left", "Speaker-Right"].map((layout, index) => (
+            {availableLayouts.map((layout, index) => (
               <div key={index}>
                 <DropdownMenuItem
                   onClick={() => {

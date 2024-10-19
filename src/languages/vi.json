@@ -138,7 +138,8 @@
     "layout": {
       "grid": "Lưới",
       "speaker-left": "Người nói bên trái",
-      "speaker-right": "Người nói bên phải"
+      "speaker-right": "Người nói bên phải",
+      "zoom": "Người nói bên dưới"
     },
     "copyRoomLink": "Sao chép liên kết phòng họp",
     "meetingLinkCopied": "Liên kết phòng họp đã được sao chép vào bộ nhớ tạm",
