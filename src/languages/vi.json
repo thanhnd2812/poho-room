@@ -161,7 +161,10 @@
     "none": "Không",
     "backgroundName": "Hình nền {index}",
     "close": "Đóng",
-    "chatbot": "PAI - Trợ lý AI"
+    "chatbot": "PAI - Trợ lý AI",
+    "endCallForEveryone": "Kết thúc cuộc họp cho mọi người",
+    "muteAll": "Tắt mic tất cả",
+    "layoutHint": "Bố cục"
   },
   "personalRoom": {
     "title": "Phòng họp cá nhân",

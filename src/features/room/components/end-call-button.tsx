@@ -1,10 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import Hint from "@/components/hint";
 import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const EndCallButton = () => {
+  const t = useTranslations("meetingRoom");
   const call = useCall();
   const router = useRouter();
 
@@ -16,20 +20,41 @@ const EndCallButton = () => {
     call?.state.createdBy &&
     (localParticipant.userId as string).includes(call?.state.createdBy.id);
 
-  console.log({ userId: localParticipant?.userId, createdBy: call?.state.createdBy });
+  const [isHost, setIsHost] = useState(isMeetingOwner || false);
 
-  if (!isMeetingOwner) return null;
+  useEffect(() => {
+    const isMeetingOwner =
+      localParticipant &&
+      call?.state.createdBy &&
+      (localParticipant.userId as string).includes(call?.state.createdBy.id);
+    setIsHost(isMeetingOwner || false);
+    if (isMeetingOwner) {
+      call?.updateCallMembers({
+        update_members: [
+          {
+            user_id: localParticipant.userId,
+            role: "host",
+          }
+        ],
+      });
+    }
+  }, [call, localParticipant]);
+
+  if (!isHost) return null;
 
   return (
-    <Button
-      onClick={async () => {
-        await call.endCall();
-        router.push("/");
-      }}
-      className="bg-red-500"
-    >
-      End call for everyone
-    </Button>
+    <Hint text={t("endCallForEveryone")}>
+      <button
+        onClick={async () => {
+          await call?.endCall();
+          router.push("/");
+        }}
+      >
+        <div className="cursor-pointer rounded-2xl bg-[#ff3030] px-8 py-2 hover:bg-[#4c535b]">
+          <IoMdCloseCircleOutline size={20} className="text-white" />
+        </div>
+      </button>
+    </Hint>
   );
 };
 

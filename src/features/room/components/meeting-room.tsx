@@ -104,28 +104,30 @@ const MeetingRoom = () => {
             router.push("/");
           }}
         />
-        <DropdownMenu>
-          <div className="flex items-center">
-            <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
-              <LayoutList size={20} className="text-white" />
-            </DropdownMenuTrigger>
-          </div>
-          <DropdownMenuContent className="border-dark-1 bg-dark-1 text-white">
-            {availableLayouts.map((layout, index) => (
-              <div key={index}>
-                <DropdownMenuItem
-                  onClick={() => {
-                    setLayout(layout.toLowerCase() as CallLayoutType);
-                  }}
-                  className="cursor-pointer"
-                >
-                  {t(`layout.${layout.toLowerCase()}`)}
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="border-dark-1" />
-              </div>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Hint text={t("layoutHint")}>
+          <DropdownMenu>
+            <div className="flex items-center">
+              <DropdownMenuTrigger className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
+                <LayoutList size={20} className="text-white" />
+              </DropdownMenuTrigger>
+            </div>
+            <DropdownMenuContent className="border-dark-1 bg-dark-1 text-white">
+              {availableLayouts.map((layout, index) => (
+                <div key={index}>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      setLayout(layout.toLowerCase() as CallLayoutType);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    {t(`layout.${layout.toLowerCase()}`)}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="border-dark-1" />
+                </div>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </Hint>
         <Hint text={t("showParticipants")}>
           <button onClick={() => setShowParticipants((prev) => !prev)}>
             <div className="cursor-pointer rounded-2xl bg-[#19232D] px-4 py-2 hover:bg-[#4c535b]">
@@ -167,8 +169,8 @@ const MeetingRoom = () => {
           </button>
         </Hint>
         {/* {!isPersonalRoom && <EndCallButton />} */}
-        <EndCallButton />
         <MuteAllButton />
+        <EndCallButton />
       </div>
     </section>
   );

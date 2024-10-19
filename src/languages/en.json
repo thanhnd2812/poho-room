@@ -160,7 +160,10 @@
     "none": "None",
     "backgroundName": "Background {index}",
     "close": "Close",
-    "chatbot": "PAI - AI assistant"
+    "chatbot": "PAI - AI assistant",
+    "endCallForEveryone": "End call for everyone",
+    "muteAll": "Mute all",
+    "layoutHint": "Layout"
   },
   "personalRoom": {
     "title": "Personal Room",
