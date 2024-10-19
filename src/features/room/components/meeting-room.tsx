@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import {
-  CallControls,
   CallingState,
   CallParticipantsList,
   PaginatedGridLayout,
@@ -25,6 +24,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import BlurEffectButton from "./blur-effect-button";
+import { CustomCallControlsButton } from "./custom-call-controls-button";
 import EndCallButton from "./end-call-button";
 
 type CallLayoutType = "grid" | "speaker-left" | "speaker-right";
@@ -88,7 +88,7 @@ const MeetingRoom = () => {
         </div>
       </div>
       <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
-        <CallControls
+        <CustomCallControlsButton
           onLeave={() => {
             router.push("/");
           }}

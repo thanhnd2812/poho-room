@@ -106,7 +106,7 @@ const MobileNav = ({ lang, confirmTitle, confirmMessage, confirmCancelText, conf
                 );
               })}
             </section>
-            <div>
+            <div className="pb-16">
               {isLoading ? (
                 <Loader />
               ) : (
@@ -123,7 +123,7 @@ const MobileNav = ({ lang, confirmTitle, confirmMessage, confirmCancelText, conf
                     onClick={signOut}
                     className="flex w-full justify-between p-2 items-center"
                   >
-                    <p className="truncate">{confirmTitle}</p>
+                    <p className="truncate text-white">{confirmTitle}</p>
                     <LogOut className="size-4 text-red-600" />
                   </button>
                 </div>
