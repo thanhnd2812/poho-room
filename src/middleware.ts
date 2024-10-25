@@ -14,11 +14,30 @@ const intlMiddleware = createIntlMiddleware(routing);
  * @returns The locale
  */
 function getLocale(request: NextRequest): string {
-  const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+  try {
+    const negotiatorHeaders: Record<string, string> = {};
+    request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  return match(languages, locales, defaultLocale);
+    const languages = new Negotiator({
+      headers: negotiatorHeaders,
+    }).languages();
+    // Filter out any invalid language tags
+    const validLanguages = languages.filter((lang) =>
+      /^[a-zA-Z-]+$/.test(lang)
+    );
+
+    if (validLanguages.length === 0) {
+      console.warn(
+        "No valid languages found in request, falling back to default locale"
+      );
+      return defaultLocale;
+    }
+
+    return match(validLanguages, locales, defaultLocale);
+  } catch (error) {
+    console.error("Error in getLocale:", error);
+    return defaultLocale;
+  }
 }
 
 export async function middleware(request: NextRequest) {
