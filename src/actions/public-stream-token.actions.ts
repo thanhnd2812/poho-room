@@ -28,7 +28,7 @@ export const updateUserFullname = async (id: string, fullname: string) => {
   if (!apiKey || !apiSecret) {
     throw new Error("No API key or secret");
   }
-
+  console.log("updateUserFullname", id, fullname);
   const client = new StreamClient(apiKey, apiSecret, {
     timeout: 6000,
   });
