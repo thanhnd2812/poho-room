@@ -37,7 +37,9 @@ const app = new Hono()
         );
       }
 
-      const client = new StreamClient(apiKey, apiSecret);
+      const client = new StreamClient(apiKey, apiSecret, {
+        timeout: 6000,
+      });
       const exp = Math.floor(Date.now() / 1000) + 60 * 60; // 1 hour
       const issued = Math.floor(Date.now() / 1000) - 60; // 1 minute ago
 

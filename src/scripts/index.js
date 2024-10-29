@@ -3,7 +3,9 @@ import firebaseServiceAccount from "./firebase-service-account.json";
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 const apiSecret = process.env.STREAM_SECRET_KEY;
 
-const serverClient = new StreamClient(apiKey, apiSecret);
+const serverClient = new StreamClient(apiKey, apiSecret, {
+  timeout: 6000,
+});
 const EXTERNAL_STORAGE_NAME = "gcs-transcriptions-2";
 async function configureTranscriptionStorage() {
   try {

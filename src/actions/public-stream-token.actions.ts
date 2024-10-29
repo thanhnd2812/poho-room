@@ -9,7 +9,9 @@ export const getPublicStreamToken = async (id?: string) => {
     throw new Error("No API key or secret");
   }
 
-  const client = new StreamClient(apiKey, apiSecret);
+  const client = new StreamClient(apiKey, apiSecret, {
+    timeout: 6000,
+  });
   const exp = Math.floor(Date.now() / 1000) + 60 * 60; // 1 hour
   const issued = Math.floor(Date.now() / 1000) - 60; // 1 minute ago
 
@@ -27,8 +29,10 @@ export const updateUserFullname = async (id: string, fullname: string) => {
     throw new Error("No API key or secret");
   }
 
-  const client = new StreamClient(apiKey, apiSecret);
-  client.updateUsersPartial({
+  const client = new StreamClient(apiKey, apiSecret, {
+    timeout: 6000,
+  });
+  return await client.updateUsersPartial({
     users: [
       {
         id,

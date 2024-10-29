@@ -14,8 +14,9 @@ import {
   DeviceSettings,
   useCall,
   useConnectedUser,
-  VideoPreview
+  VideoPreview,
 } from "@stream-io/video-react-sdk";
+import console from "console";
 import { Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -37,9 +38,16 @@ const MeetingSetup = ({
   }
 
   const changeName = async () => {
-    if (!connectedUser || !name || name.length < 5) return;
-    await updateUserFullname(connectedUser.id, name);
-    toast.success(t("nameUpdated"));
+    if (!connectedUser || !name || name.length < 1) return;
+    updateUserFullname(connectedUser.id, name)
+      .then((res) => {
+        console.log(res);
+        toast.success(t("nameUpdated"));
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(t("nameUpdateFailed"));
+      });
   };
 
   useEffect(() => {

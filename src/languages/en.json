@@ -132,7 +132,8 @@
     "copyLink": "Copy Link",
     "meetingLinkCopied": "Meeting link copied to clipboard",
     "update": "Update name",
-    "nameUpdated": "Name updated successfully"
+    "nameUpdated": "Name updated successfully",
+    "nameUpdateFailed": "Failed to update name"
   },
   "meetingRoom": {
     "layout": {
