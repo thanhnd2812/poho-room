@@ -55,10 +55,9 @@ const MeetingSetup = ({
       connectedUser &&
       call?.state.createdBy &&
       connectedUser.id.includes(call?.state.createdBy.id);
-    console.log("isMeetingOwner", isMeetingOwner);
 
     if (isMeetingOwner && name) {
-      updateUserFullname(connectedUser.id, name, true);
+      await updateUserFullname(connectedUser.id, name, true);
     }
     call?.join();
     setIsSetupComplete(true);

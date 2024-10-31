@@ -38,7 +38,6 @@ const EndCallButton = () => {
           },
         ],
       });
-
     }
   }, [call, localParticipant]);
 
