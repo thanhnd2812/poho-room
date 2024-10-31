@@ -28,7 +28,7 @@ const EndCallButton = () => {
       call?.state.createdBy &&
       (localParticipant.userId as string).includes(call?.state.createdBy.id);
     setIsHost(isMeetingOwner || false);
-    if (isMeetingOwner) {
+    if (isMeetingOwner && call?.state.members.find(member => member.user_id === localParticipant.userId)?.role !== "host") {
       call?.updateCallMembers({
         update_members: [
           {
