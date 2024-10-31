@@ -39,6 +39,7 @@ const MeetingSetup = ({
 
   const changeName = async () => {
     if (!connectedUser || !name || name.length < 1) return;
+    
     updateUserFullname(connectedUser.id, name)
       .then(() => {
         toast.success(t("nameUpdated"));
@@ -46,6 +47,21 @@ const MeetingSetup = ({
       .catch(() => {
         toast.error(t("nameUpdateFailed"));
       });
+    
+  };
+
+  const joinMeeting = async () => {
+    const isMeetingOwner =
+      connectedUser &&
+      call?.state.createdBy &&
+      connectedUser.id.includes(call?.state.createdBy.id);
+    console.log("isMeetingOwner", isMeetingOwner);
+
+    if (isMeetingOwner && name) {
+      updateUserFullname(connectedUser.id, name, true);
+    }
+    call?.join();
+    setIsSetupComplete(true);
   };
 
   useEffect(() => {
@@ -118,10 +134,7 @@ const MeetingSetup = ({
         </div>
         <div className="flex items-center gap-3 mt-3 w-96">
           <Button
-            onClick={() => {
-              call?.join();
-              setIsSetupComplete(true);
-            }}
+            onClick={joinMeeting}
             className="rounded-md px-4 py-2.5 text-white w-full"
           >
             {t("joinMeeting")}

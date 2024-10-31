@@ -23,6 +23,7 @@ const EndCallButton = () => {
   const [isHost, setIsHost] = useState(isMeetingOwner || false);
 
   useEffect(() => {
+    
     const isMeetingOwner =
       localParticipant &&
       call?.state.createdBy &&
@@ -34,9 +35,10 @@ const EndCallButton = () => {
           {
             user_id: localParticipant.userId,
             role: "host",
-          }
+          },
         ],
       });
+
     }
   }, [call, localParticipant]);
 

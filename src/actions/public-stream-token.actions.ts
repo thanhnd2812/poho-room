@@ -24,11 +24,12 @@ export const getPublicStreamToken = async (id?: string) => {
   return token;
 };
 
-export const updateUserFullname = async (id: string, fullname: string) => {
+export const updateUserFullname = async (id: string, fullname: string, isHost: boolean = false) => {
   if (!apiKey || !apiSecret) {
     throw new Error("No API key or secret");
   }
-  console.log("updateUserFullname", id, fullname);
+  const displayName = isHost ? `${fullname} (Host)` : fullname;
+  console.log("updateUserFullname", id, displayName);
   const client = new StreamClient(apiKey, apiSecret, {
     timeout: 6000,
   });
@@ -37,7 +38,7 @@ export const updateUserFullname = async (id: string, fullname: string) => {
       {
         id,
         set: {
-          name: fullname,
+          name: displayName,
         },
       },
     ],
