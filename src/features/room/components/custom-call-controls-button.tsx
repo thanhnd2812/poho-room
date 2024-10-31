@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CancelCallButton,
   OwnCapability,
@@ -13,11 +15,23 @@ import { isMobile } from "react-device-detect";
 
 import { cn } from "@/lib/utils";
 import type { CallControlsProps } from "@stream-io/video-react-sdk";
+import { useEffect, useState } from "react";
 
-export const CustomCallControlsButton = ({ onLeave }: CallControlsProps) => (
-  <div className="str-video__call-controls">
-    <Restricted requiredGrants={[OwnCapability.SEND_AUDIO]}>
-      <SpeakingWhileMutedNotification>
+export const CustomCallControlsButton = ({ onLeave }: CallControlsProps) => {
+  const [isScreenShareSupported, setIsScreenShareSupported] = useState(false);
+
+  useEffect(() => {
+    // Check if screen sharing is supported
+    const checkScreenShareSupport = () => {
+      return !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia);
+    };
+    setIsScreenShareSupported(checkScreenShareSupport());
+  }, []);
+
+  return (
+    <div className="str-video__call-controls">
+      <Restricted requiredGrants={[OwnCapability.SEND_AUDIO]}>
+        <SpeakingWhileMutedNotification>
         <ToggleAudioPublishingButton />
       </SpeakingWhileMutedNotification>
     </Restricted>
@@ -28,7 +42,7 @@ export const CustomCallControlsButton = ({ onLeave }: CallControlsProps) => (
       <ReactionsButton />
     </Restricted>
     <Restricted requiredGrants={[OwnCapability.SCREENSHARE]}>
-      <div className={cn("", { hidden: isMobile })}>
+      <div className={cn("", { hidden: isMobile || !isScreenShareSupported })}>
         <ScreenShareButton />
       </div>
     </Restricted>
@@ -40,6 +54,7 @@ export const CustomCallControlsButton = ({ onLeave }: CallControlsProps) => (
     >
       <RecordCallButton />
     </Restricted>
-    <CancelCallButton onLeave={onLeave} />
-  </div>
-);
+      <CancelCallButton onLeave={onLeave} />
+    </div>
+  );
+};

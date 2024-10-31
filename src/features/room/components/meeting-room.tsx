@@ -39,7 +39,7 @@ const MeetingRoom = () => {
   const t = useTranslations("meetingRoom");
   // const searchParams = useSearchParams();
   // const isPersonalRoom = !!searchParams.get("personal");
-  const [layout, setLayout] = useState<CallLayoutType>("grid");
+  const [layout, setLayout] = useState<CallLayoutType>("zoom");
   const [showParticipants, setShowParticipants] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
@@ -69,7 +69,7 @@ const MeetingRoom = () => {
       case "zoom":
         return <ZoomLayout />;
       default:
-        return <PaginatedGridLayout />;
+        return <ZoomLayout />;
     }
   };
 
